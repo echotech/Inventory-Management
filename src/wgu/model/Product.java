@@ -84,19 +84,29 @@ public class Product{
        return null;
    }
 
-    public void setInstock(int amt){this.instock=amt;}
+    public void setInstock(int amt){this.instock.set(amt);}
 
-    public int getInstock(){return this.instock;}
+    public int getInstock(){return instock.get();}
 
-    public void setMin(int min){this.min=min;}
+    public IntegerProperty inStockProperty(){return instock;}
 
-    public int getMin(){return this.min;}
+    public void setMin(int min){this.min.set(min);}
 
-    public void setMax(int max){this.max=max;}
+    public int getMin(){return min.get();}
 
-    public int getMax(){return this.max;}
+    public IntegerProperty minProperty(){return min;}
 
-    public void setPartID(int id){this.productID = next_id.incrementAndGet();  }
+    public void setMax(int max){this.max.set(max);}
 
-    public int getProductID(){return this.productID;}
+    public int getMax(){return max.get();}
+
+    public IntegerProperty maxProperty(){return max;}
+
+    public void setProductID(int id){this.productID.set(next_id.incrementAndGet());  }
+
+    public int getProductID(){return productID.get();}
+
+    public IntegerProperty productIDProperty(){return productID;}
+
+
 }

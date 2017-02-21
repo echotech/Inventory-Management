@@ -22,49 +22,29 @@ public abstract class Part{
 
 
     //Setters and Getters
-    public void setName(String name){
-        this.name=name;
-    }
+    public void setInstock(int amt){this.instock.set(amt);}
 
-    public String getName(){
-        return this.name;
-    }
+    public int getInstock(){return instock.get();}
 
-    public void setPrice(double price){
-        this.price=price;
-    }
+    public IntegerProperty inStockProperty(){return instock;}
 
-    public double getPrice(){
-        return this.price;
-    }
+    public void setMin(int min){this.min.set(min);}
 
-    public void setInstock(int amt){
-        this.instock=amt;
-    }
+    public int getMin(){return min.get();}
 
-    public int getInstock(){
-        return this.instock;
-    }
+    public IntegerProperty minProperty(){return min;}
 
-    public int getMin() {
-        return this.min;
-    }
+    public void setMax(int max){this.max.set(max);}
 
-    public void setMin(int min) {
-        this.min = min;
-    }
+    public int getMax(){return max.get();}
 
-    public int getMax() {
-        return this.max;
-    }
+    public IntegerProperty maxProperty(){return max;}
 
-    public void setMax(int max) {
-        this.max = max;
-    }
+    public void setProductID(int id){this.partID.set(next_id.incrementAndGet());  }
 
-    public void setPartID(int id){ this.partID = next_id.incrementAndGet();}
+    public int getProductID(){return partID.get();}
 
-    public int getPartID(){ return this.partID;}
+    public IntegerProperty productIDProperty(){return partID;}
 
 
 }
