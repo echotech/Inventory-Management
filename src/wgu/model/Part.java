@@ -1,5 +1,9 @@
 package wgu.model;
 
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.StringProperty;
+
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
@@ -8,12 +12,12 @@ import java.util.concurrent.atomic.AtomicInteger;
 public abstract class Part{
 
     private static AtomicInteger next_id = new AtomicInteger(0);
-    private String name;
-    private double price;
-    private int instock;
-    private int min;
-    private int max;
-    private int partID;
+    private StringProperty name;
+    private DoubleProperty price;
+    private IntegerProperty instock;
+    private IntegerProperty min;
+    private IntegerProperty max;
+    private IntegerProperty partID;
 
 
 

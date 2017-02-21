@@ -1,5 +1,8 @@
 package wgu.model;
 
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.StringProperty;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
@@ -20,12 +23,12 @@ public class Product{
      */
     private static AtomicInteger next_id = new AtomicInteger(0);  // <-- static, class-wide counter
     private ArrayList<Part> parts;
-    private String name;
-    private double price;
-    private int instock;
-    private int min;
-    private int max;
-    private int productID;
+    private StringProperty name;
+    private DoubleProperty price;
+    private IntegerProperty instock;
+    private IntegerProperty min;
+    private IntegerProperty max;
+    private IntegerProperty productID;
 
     /** Add part to parts arraylist
      *
@@ -63,7 +66,7 @@ public class Product{
            modifyLayout = (AnchorPane) loader.load();
 
            // Show the scene containing the root layout.
-           Scene scene = new Scene(rootLayout);
+           Scene scene = new Scene(modifyLayout);
            primaryStage.setScene(scene);
            primaryStage.show();
        } catch (IOException e) {
