@@ -25,7 +25,7 @@ public class Inventory {
 
     public Product lookupProduct(int id){
         for (Product prod : products) {
-            if (prod.getProductID().equals(id)) {
+            if (prod.getProductID()==(id)) {
                 return prod;
             }
         }
