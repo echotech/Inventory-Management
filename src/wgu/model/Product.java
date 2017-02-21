@@ -1,5 +1,11 @@
 package wgu.model;
 
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
+import wgu.MainApp;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -49,7 +55,20 @@ public class Product{
     }
 
    public void updatePart(int something){
-        //update part using gui
+       try {
+           AnchorPane modifyLayout = new AnchorPane();
+           // Load root layout from fxml file.
+           FXMLLoader loader = new FXMLLoader();
+           loader.setLocation(MainApp.class.getResource("ModifyPart.fxml"));
+           modifyLayout = (AnchorPane) loader.load();
+
+           // Show the scene containing the root layout.
+           Scene scene = new Scene(rootLayout);
+           primaryStage.setScene(scene);
+           primaryStage.show();
+       } catch (IOException e) {
+           e.printStackTrace();
+       }
    }
 
    public Part lookupPart(int id) {
