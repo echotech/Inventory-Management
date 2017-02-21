@@ -1,5 +1,7 @@
 package wgu.model;
 
+import javafx.beans.property.StringProperty;
+
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
@@ -7,16 +9,28 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 public class Outsourced extends Part{
 
-    private String companyName;
-    private String CompanyPhone;
+    private StringProperty companyName;
+    private StringProperty companyPhone;
 
     public void setCompanyName(String companyName) {
-        this.companyName = companyName;
+        this.companyName.set(companyName);
     }
 
     public String getCompanyName() {
-        return this.companyName;
+        return companyName.get();
     }
+
+    public StringProperty nameProperty(){return companyName;}
+
+    public void setCompanyPhone(String companyPhone) {
+        this.companyPhone.set(companyPhone);
+    }
+
+    public String getCompanyPhone() {
+        return companyPhone.get();
+    }
+
+    public StringProperty phoneProperty(){return companyPhone;}
 
 
     }
