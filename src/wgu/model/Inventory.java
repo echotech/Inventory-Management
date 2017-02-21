@@ -12,7 +12,15 @@ public class Inventory {
     public void addProduct(Product p){ products.add(p);}
 
     public boolean removeProduct(int rem){
-        return true;
+        for(Product prod : products){
+            if (prod.getProductID()==(rem)){
+                products.remove(prod);
+                return true;
+
+            }
+        }
+
+        return false;
     }
 
     public Product lookupProduct(int id){

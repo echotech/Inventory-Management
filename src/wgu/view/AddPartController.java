@@ -12,7 +12,7 @@ import wgu.model.*;
  *
  * @author Jed Reisner
  */
-public class AddPartsController {
+public class AddPartController {
 
     @FXML
     private TextField idField;
