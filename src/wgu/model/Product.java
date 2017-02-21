@@ -37,7 +37,6 @@ public class Product{
      * @return
      */
     public boolean removePart(int id){
-        int rem=id;
         for(Part part : parts){
             if (part.getPartID()==(id)){
                 parts.remove(part);
@@ -49,7 +48,9 @@ public class Product{
         return false;
     }
 
-   public void updatePart(int id){}
+   public void updatePart(int something){
+        //update part using gui
+   }
 
    public Part lookupPart(int id) {
 
