@@ -51,7 +51,7 @@ public class Product{
    public void updatePart(int id) throws Exception {
 
        for(Part part : parts){
-           if (part.getProductID()==(id)){
+           if (part.getPartID()==(id)){
               return;            }
            else {
               throw new Exception("Part not found.");
@@ -63,7 +63,7 @@ public class Product{
    public Part lookupPart(int id) throws Exception {
 
        for (Part part : parts) {
-           if (part.getProductID()==(id)) {
+           if (part.getPartID()==(id)) {
                return part;}
            else {
                throw new Exception("Part not found.");
