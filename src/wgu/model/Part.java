@@ -19,8 +19,6 @@ public abstract class Part{
     private IntegerProperty max;
     private IntegerProperty partID;
 
-
-
     //Setters and Getters
     public void setInstock(int amt){this.instock.set(amt);}
 
