@@ -40,11 +40,11 @@ public abstract class Part{
 
     public IntegerProperty maxProperty(){return max;}
 
-    public void setProductID(int id){this.partID.set(next_id.incrementAndGet());  }
+    public void setPartID(int id){this.partID.set(next_id.incrementAndGet());  }
 
-    public int getProductID(){return partID.get();}
+    public int getPartID(){return partID.get();}
 
-    public IntegerProperty productIDProperty(){return partID;}
+    public IntegerProperty partIDProperty(){return partID;}
 
 
 }

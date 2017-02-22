@@ -12,21 +12,16 @@ public class Inventory {
     public void addProduct(Product p){ products.add(p);}
 
     public boolean removeProduct(int rem){
-        for(Product prod : products){
-            if (prod.getProductID()==(rem)){
-                products.remove(prod);
-                return true;
-
-            }
-        }
-
-        return false;
+        return products.removeIf(part -> part.getProductID()==rem);
     }
 
-    public Product lookupProduct(int id){
+    public Product lookupProduct(int id) throws Exception{
         for (Product prod : products) {
             if (prod.getProductID()==(id)) {
                 return prod;
+            }
+            else{
+                throw new Exception("Product not found.");
             }
         }
         return null;

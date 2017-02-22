@@ -1,8 +1,6 @@
 package wgu.model;
 
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.StringProperty;
+import javafx.beans.property.*;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
@@ -10,8 +8,9 @@ import wgu.MainApp;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.concurrent.atomic.AtomicInteger;
-
+import static java.lang.System.out;
 
 /**
  * Created by jreis on 2/2/2017.
@@ -23,9 +22,9 @@ public class Product{
      */
     private static AtomicInteger next_id = new AtomicInteger(0);  // <-- static, class-wide counter
     private ArrayList<Part> parts;
-    private StringProperty name;
-    private DoubleProperty price;
-    private IntegerProperty instock;
+    private SimpleStringProperty name;
+    private SimpleDoubleProperty price;
+    private SimpleIntegerProperty instock;
     private IntegerProperty min;
     private IntegerProperty max;
     private IntegerProperty productID;
@@ -43,70 +42,60 @@ public class Product{
     /** Remove part by ID
      *
      * @param id
-     * @return
+     * @return boolean
      */
     public boolean removePart(int id){
-        for(Part part : parts){
-            if (part.getPartID()==(id)){
-                parts.remove(part);
-                return true;
-
-            }
-        }
-
-        return false;
+       return parts.removeIf(part -> part.getPartID()==id);
     }
 
-   public void updatePart(int something){
-       try {
-           AnchorPane modifyLayout = new AnchorPane();
-           // Load root layout from fxml file.
-           FXMLLoader loader = new FXMLLoader();
-           loader.setLocation(MainApp.class.getResource("ModifyPart.fxml"));
-           modifyLayout = (AnchorPane) loader.load();
+   public void updatePart(int id) throws Exception {
 
-           // Show the scene containing the root layout.
-           Scene scene = new Scene(modifyLayout);
-           primaryStage.setScene(scene);
-           primaryStage.show();
-       } catch (IOException e) {
-           e.printStackTrace();
+       for(Part part : parts){
+           if (part.getProductID()==(id)){
+              return;            }
+           else {
+              throw new Exception("Part not found.");
+           }
        }
+
    }
 
-   public Part lookupPart(int id) {
+   public Part lookupPart(int id) throws Exception {
 
        for (Part part : parts) {
-           if (part.getPartID()==(id)) {
-               return part;
+           if (part.getProductID()==(id)) {
+               return part;}
+           else {
+               throw new Exception("Part not found.");
            }
        }
        return null;
+
    }
 
     public void setInstock(int amt){this.instock.set(amt);}
 
     public int getInstock(){return instock.get();}
 
-    public IntegerProperty inStockProperty(){return instock;}
+    public SimpleIntegerProperty inStockProperty(){return instock;}
 
     public void setMin(int min){this.min.set(min);}
 
     public int getMin(){return min.get();}
 
-    public IntegerProperty minProperty(){return min;}
+    public SimpleIntegerProperty minProperty(){return min;}
 
     public void setMax(int max){this.max.set(max);}
 
     public int getMax(){return max.get();}
 
-    public IntegerProperty maxProperty(){return max;}
+    public SimpleIntegerProperty maxProperty(){return max;}
 
     public void setProductID(int id){this.productID.set(next_id.incrementAndGet());  }
 
     public int getProductID(){return productID.get();}
 
-    public IntegerProperty productIDProperty(){return productID;}
+    public SimpleIntegerProperty productIDProperty(){return productID;}
 
 
 }
