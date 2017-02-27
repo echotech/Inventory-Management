@@ -25,9 +25,9 @@ public class Product{
     private SimpleStringProperty name;
     private SimpleDoubleProperty price;
     private SimpleIntegerProperty instock;
-    private IntegerProperty min;
-    private IntegerProperty max;
-    private IntegerProperty productID;
+    private SimpleIntegerProperty min;
+    private SimpleIntegerProperty max;
+    private SimpleIntegerProperty productID;
 
     /** Add part to parts arraylist
      *
