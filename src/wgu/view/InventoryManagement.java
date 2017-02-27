@@ -63,6 +63,7 @@ public class InventoryManagement {
             cityLabel.setText(person.getCity());
     }
 
+    
     /**
      * Called when the user clicks on the delete button.
      */
