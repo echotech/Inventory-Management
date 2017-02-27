@@ -19,6 +19,7 @@ import wgu.model.InHouse;
 import wgu.model.Part;
 import wgu.model.Product;
 import wgu.view.AddPartController;
+import wgu.view.InventoryManagement;
 
 
 public class MainApp extends Application {
@@ -64,76 +65,26 @@ public class MainApp extends Application {
         }
     }
 
-
-
     /**
-     * Called when the user clicks on the delete button.
+     * Shows the person overview inside the root layout.
      */
-    @FXML
-    private void handleDeletePart() {
-        int selectedIndex = partTable.getSelectionModel().getSelectedIndex();
-        if (selectedIndex >= 0) {
-            partTable.getItems().remove(selectedIndex);
-        } else {
-            // Nothing selected.
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.initOwner(mainApp.getPrimaryStage());
-            alert.setTitle("No Selection");
-            alert.setHeaderText("No Person Selected");
-            alert.setContentText("Please select a person in the table.");
-
-            alert.showAndWait();
-        }
-    }
-
-
-    @FXML
-    private void handleExit() {
-        primaryStage.close();}
-
-
-    public void addPart(Part add){
+    public void showInventoryManagement() {
         try {
-            // Load the fxml file and create a new stage for the popup dialog.
+            // Load inventory view.
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("view/AddPart.fxml"));
-            AnchorPane page = (AnchorPane) loader.load();
+            loader.setLocation(MainApp.class.getResource("view/InventoryManagement.fxml"));
+            AnchorPane inventoryOverview = (AnchorPane) loader.load();
 
-            // Create the dialog Stage.
-            Stage dialogStage = new Stage();
-            dialogStage.setTitle("Edit Part");
-            dialogStage.initModality(Modality.WINDOW_MODAL);
-            dialogStage.initOwner(primaryStage);
-            Scene scene = new Scene(page);
-            dialogStage.setScene(scene);
+            // Set person overview into the center of root layout.
+            rootLayout.setCenter(inventoryOverview);
 
-            // Set the person into the controller.
-            AddPartController controller = loader.getController();
-            controller.setDialogStage(dialogStage);
-            controller.setPart(part);
+            // Give the controller access to the main app.
+            InventoryManagement controller = loader.getController();
+            controller.setMainApp(this);
 
-            // Show the dialog and wait until the user closes it
-            dialogStage.showAndWait();
-
-            return controller.isOkClicked();
         } catch (IOException e) {
             e.printStackTrace();
-            return false;
         }
-    }
-
-    public boolean removeProduct(int rem){
-        //code to remove product
-
-        return true;
-    }
-
-    public Part lookupProduct(int id){
-        //code to look up product
-        return new InHouse();
-    }
-    public void updateProduct(int prod){
-        //code to modify product
     }
 
 
