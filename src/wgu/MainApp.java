@@ -12,17 +12,18 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import wgu.model.InHouse;
 import wgu.model.Part;
 import wgu.model.Product;
+import wgu.view.AddPartController;
 
 
 public class MainApp extends Application {
 
     private Stage primaryStage;
-
-
     private AnchorPane rootLayout;
     @FXML
     private Scene addPart, modPart, modProduct;
@@ -51,8 +52,8 @@ public class MainApp extends Application {
         try {
             // Load root layout from fxml file.
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("InventoryManagement.fxml"));
-            rootLayout = (AnchorPane) loader.load();
+            loader.setLocation(MainApp.class.getResource("view/Root.fxml"));
+            rootLayout = (BorderPane) loader.load();
 
             // Show the scene containing the root layout.
             Scene scene = new Scene(rootLayout);
@@ -63,11 +64,13 @@ public class MainApp extends Application {
         }
     }
 
+
+
     /**
      * Called when the user clicks on the delete button.
      */
     @FXML
-    private void handleDeletePerson() {
+    private void handleDeletePart() {
         int selectedIndex = partTable.getSelectionModel().getSelectedIndex();
         if (selectedIndex >= 0) {
             partTable.getItems().remove(selectedIndex);
@@ -89,9 +92,34 @@ public class MainApp extends Application {
         primaryStage.close();}
 
 
-    public void addProduct(Product add){
-        add = new Product();
-        products.add(add);
+    public void addPart(Part add){
+        try {
+            // Load the fxml file and create a new stage for the popup dialog.
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainApp.class.getResource("view/AddPart.fxml"));
+            AnchorPane page = (AnchorPane) loader.load();
+
+            // Create the dialog Stage.
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle("Edit Part");
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initOwner(primaryStage);
+            Scene scene = new Scene(page);
+            dialogStage.setScene(scene);
+
+            // Set the person into the controller.
+            AddPartController controller = loader.getController();
+            controller.setDialogStage(dialogStage);
+            controller.setPart(part);
+
+            // Show the dialog and wait until the user closes it
+            dialogStage.showAndWait();
+
+            return controller.isOkClicked();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     public boolean removeProduct(int rem){

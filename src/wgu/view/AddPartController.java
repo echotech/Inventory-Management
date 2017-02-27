@@ -5,6 +5,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 import wgu.model.*;
+import wgu.MainApp;
 
 
 /**
@@ -37,14 +38,18 @@ public class AddPartController {
     private InHouse in;
     public RadioButton prodType;
 
+    private MainApp mainApp;
 
 
+    public AddPartController(){
+    }
     /**
      * Initializes the controller class. This method is automatically called
      * after the fxml file has been loaded.
      */
     @FXML
     private void initialize() {
+
     }
 
     /**

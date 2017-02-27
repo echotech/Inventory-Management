@@ -1,5 +1,6 @@
 package wgu.model;
 
+import com.sun.xml.internal.bind.v2.model.core.ID;
 import javafx.beans.property.*;
 
 import java.util.concurrent.atomic.AtomicInteger;
@@ -41,6 +42,17 @@ public abstract class Part{
     public void setPartID(int id){this.partID.set(next_id.incrementAndGet());  }
     public int getPartID(){return partID.get();}
     public SimpleIntegerProperty partIDProperty(){return partID;}
+
+    //Constructors
+    public Part(){}
+    public Part(SimpleIntegerProperty ID, SimpleStringProperty name, SimpleDoubleProperty partPrice, SimpleIntegerProperty partInstock, SimpleIntegerProperty partMin, SimpleIntegerProperty partMax){
+        this.partID=ID;
+        this.name=name;
+        this.price=partPrice;
+        this.instock=partInstock;
+        this.min=partMin;
+        this.max=partMax;
+    }
 
 
 }
