@@ -2,6 +2,9 @@ package wgu.view;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.stage.Stage;
+import wgu.model.InHouse;
 import wgu.model.Outsourced;
 import wgu.model.Part;
 
@@ -11,7 +14,7 @@ import wgu.model.Part;
 public class ModifyPartController {
 
     @FXML
-    private Label iDLabel;
+    private Label idLabel;
     @FXML
     private Label nameLabel;
     @FXML
@@ -28,6 +31,14 @@ public class ModifyPartController {
     private Label companyNameLabel;
     @FXML
     private Label machineIdLabel;
+    @FXML
+    private TextField companyNameText;
+    @FXML
+    private TextField machineIdText;
+
+    private Stage dialogStage;
+    private Part part;
+    private boolean saveClicked= false;
 
     @FXML
     protected void onInhouseRadioButtonSelected() {
@@ -55,13 +66,39 @@ public class ModifyPartController {
      */
     private void modifyPart(Part part) {
         // Fill the labels with info from the part object.
-        iDLabel.setText(Integer.toString(part.getPartID()));
+        idLabel.setText(Integer.toString(part.getPartID()));
         nameLabel.setText(part.getName());
         invLabel.setText(Integer.toString(part.getInstock()));
         priceLabel.setText(Double.toString(part.getPrice()));
         minLabel.setText(Integer.toString(part.getMin()));
         maxLabel.setText(Integer.toString(part.getMax()));
-        companyLabel.setText((Outsourced)part.getCompanyName());
+        companyNameLabel.setText(Integer.toString((Outsourced)part.getCompanyName()));
+        machineIdLabel.setText(Integer.toString(InHouse.getMachineID()));
+    }
+
+    public boolean saveClicked(){return saveClicked;}
+
+    private void handleSave(){
+        if (inHouseSelected){
+            part.setPartID(Integer.parseInt(idLabel.getText()));
+            part.setName(nameLabel.getText());
+            part.setInstock(Integer.parseInt(invLabel.getText());
+            part.setPrice(Double.parseDouble(priceLabel.getText()));
+            part.setMin(Integer.parseInt(minLabel.getText()));
+            part.setMax(Integer.parseInt(maxLabel.getText()));
+            (InHouse)part.setMachineID(Integer.parseInt(machineIdLabel.getText()));
+        } else if (outSourcedSelected){
+            part.setPartID(Integer.parseInt(idLabel.getText()));
+            part.setName(nameLabel.getText());
+            part.setInstock(Integer.parseInt(invLabel.getText());
+            part.setPrice(Double.parseDouble(priceLabel.getText()));
+            part.setMin(Integer.parseInt(minLabel.getText()));
+            part.setMax(Integer.parseInt(maxLabel.getText()));
+            (Outsourced)part.setCompanyName(companyNameLabel.getText());
+
+        } else {
+            return;
+        }
     }
 
 
