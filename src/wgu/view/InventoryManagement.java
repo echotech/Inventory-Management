@@ -10,7 +10,6 @@ import javafx.stage.Stage;
 import wgu.MainApp;
 import wgu.model.InHouse;
 import wgu.model.Part;
-
 import java.io.IOException;
 
 /**
@@ -52,12 +51,12 @@ public class InventoryManagement {
 
     /** Modify Part Button
      *
-     * @param person
+     * @param part
      */
     private void modifyPart(Part part) {
             // Fill the labels with info from the part object.
-            firstNameLabel.setText(person.getFirstName());
-            lastNameLabel.setText(person.getLastName());
+            firstNameLabel.setText(part.getPartID());
+            lastNameLabel.setText(part.getLastName());
             streetLabel.setText(person.getStreet());
             postalCodeLabel.setText(Integer.toString(person.getPostalCode()));
             cityLabel.setText(person.getCity());
