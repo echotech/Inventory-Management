@@ -1,6 +1,8 @@
 package wgu.view;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -72,8 +74,8 @@ public class ModifyPartController {
         priceLabel.setText(Double.toString(part.getPrice()));
         minLabel.setText(Integer.toString(part.getMin()));
         maxLabel.setText(Integer.toString(part.getMax()));
-        companyNameLabel.setText(Integer.toString((Outsourced)part.getCompanyName()));
-        machineIdLabel.setText(Integer.toString(InHouse.getMachineID()));
+        companyNameLabel.setText(((Outsourced)part).getCompanyName());
+        machineIdLabel.setText(Integer.toString(((InHouse)part).getMachineID()));
     }
 
     public boolean saveClicked(){return saveClicked;}
@@ -86,7 +88,7 @@ public class ModifyPartController {
             part.setPrice(Double.parseDouble(priceLabel.getText()));
             part.setMin(Integer.parseInt(minLabel.getText()));
             part.setMax(Integer.parseInt(maxLabel.getText()));
-            (InHouse)part.setMachineID(Integer.parseInt(machineIdLabel.getText()));
+            ((InHouse)part).setMachineID(Integer.parseInt(machineIdLabel.getText()));
         } else if (outSourcedSelected){
             part.setPartID(Integer.parseInt(idLabel.getText()));
             part.setName(nameLabel.getText());
@@ -94,10 +96,18 @@ public class ModifyPartController {
             part.setPrice(Double.parseDouble(priceLabel.getText()));
             part.setMin(Integer.parseInt(minLabel.getText()));
             part.setMax(Integer.parseInt(maxLabel.getText()));
-            (Outsourced)part.setCompanyName(companyNameLabel.getText());
+            ((Outsourced)part).setCompanyName(companyNameLabel.getText());
 
         } else {
-            return;
+            // Show the error message.
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.initOwner(dialogStage);
+            alert.setTitle("Invalid Fields");
+            alert.setHeaderText("Please correct invalid fields");
+            alert.setContentText("Please select In-House or Outsourced");
+
+            alert.showAndWait();
+
         }
     }
 
