@@ -1,10 +1,13 @@
 package wgu.view;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.ToggleButton;
 import javafx.stage.Stage;
 import wgu.model.InHouse;
 import wgu.model.Outsourced;
@@ -37,10 +40,36 @@ public class ModifyPartController {
     private TextField companyNameText;
     @FXML
     private TextField machineIdText;
-
     private Stage dialogStage;
     private Part part;
     private boolean saveClicked= false;
+
+    ToggleButton tbInhouse = new ToggleButton();
+    ToggleButton tbOutsourced = new ToggleButton();
+
+    final ToggleGroup partType = new ToggleGroup();
+
+    @FXML
+    private void initialize(){
+
+        tbInhouse.setToggleGroup(partType);
+        tbOutsourced.setToggleGroup(partType);
+        tbInhouse.setSelected(true);
+
+        partType.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
+            public void changed(ObservableValue<? extends Toggle> ov,
+                                Toggle old_toggle, Toggle new_toggle) {
+                if (partType.getSelectedToggle() != null) {
+                    System.out.println(partType.getSelectedToggle().getUserData().toString());
+                }
+            }
+        });
+    }
+
+
+    public void setDialogStage(Stage dialogStage) {
+        this.dialogStage = dialogStage;
+    }
 
     @FXML
     protected void onInhouseRadioButtonSelected() {
@@ -78,10 +107,10 @@ public class ModifyPartController {
         machineIdLabel.setText(Integer.toString(((InHouse)part).getMachineID()));
     }
 
-    public boolean saveClicked(){return saveClicked;}
+    public boolean isSaveClicked(){return saveClicked;}
 
     private void handleSave(){
-        if (inHouseSelected){
+        if (partType.getSelectedToggle().equals(tbInhouse)){
             part.setPartID(Integer.parseInt(idLabel.getText()));
             part.setName(nameLabel.getText());
             part.setInstock(Integer.parseInt(invLabel.getText());
@@ -89,7 +118,7 @@ public class ModifyPartController {
             part.setMin(Integer.parseInt(minLabel.getText()));
             part.setMax(Integer.parseInt(maxLabel.getText()));
             ((InHouse)part).setMachineID(Integer.parseInt(machineIdLabel.getText()));
-        } else if (outSourcedSelected){
+        } else if (partType.getSelectedToggle().equals(tbOutsourced)){
             part.setPartID(Integer.parseInt(idLabel.getText()));
             part.setName(nameLabel.getText());
             part.setInstock(Integer.parseInt(invLabel.getText());
@@ -110,7 +139,4 @@ public class ModifyPartController {
 
         }
     }
-
-
-
 }
