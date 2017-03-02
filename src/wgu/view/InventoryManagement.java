@@ -53,13 +53,24 @@ public class InventoryManagement {
      *
      * @param part
      */
-    private void modifyPart(Part part) {
-            // Fill the labels with info from the part object.
-            firstNameLabel.setText(part.getPartID());
-            lastNameLabel.setText(part.getLastName());
-            streetLabel.setText(person.getStreet());
-            postalCodeLabel.setText(Integer.toString(person.getPostalCode()));
-            cityLabel.setText(person.getCity());
+    private void handleModifyPart(Part part) {
+        Part selectedPart = partTable.getSelectionModel().getSelectedItem();
+        if (selectedPart != null) {
+            boolean okClicked = mainApp.showModifyPartDialog(selectedPart);
+            if (okClicked) {
+                showPersonDetails(selectedPerson);
+            }
+
+        } else {
+            // Nothing selected.
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.initOwner(mainApp.getPrimaryStage());
+            alert.setTitle("No Selection");
+            alert.setHeaderText("No Person Selected");
+            alert.setContentText("Please select a person in the table.");
+
+            alert.showAndWait();
+        }
     }
 
 

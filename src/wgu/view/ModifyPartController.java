@@ -31,8 +31,6 @@ public class ModifyPartController {
     @FXML
     private Label maxLabel;
     @FXML
-    private Label companyLabel;
-    @FXML
     private Label companyNameLabel;
     @FXML
     private Label machineIdLabel;
@@ -40,14 +38,22 @@ public class ModifyPartController {
     private TextField companyNameText;
     @FXML
     private TextField machineIdText;
+    @FXML
+    ToggleButton tbInhouse = new ToggleButton();
+    @FXML
+    ToggleButton tbOutsourced = new ToggleButton();
+    @FXML
+    final ToggleGroup partType = new ToggleGroup();
+    @FXML
+    private Button save;
+    @FXML
+    private Button cancel;
+
     private Stage dialogStage;
     private Part part;
     private boolean saveClicked= false;
 
-    ToggleButton tbInhouse = new ToggleButton();
-    ToggleButton tbOutsourced = new ToggleButton();
 
-    final ToggleGroup partType = new ToggleGroup();
 
     @FXML
     private void initialize(){
@@ -59,8 +65,16 @@ public class ModifyPartController {
         partType.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
             public void changed(ObservableValue<? extends Toggle> ov,
                                 Toggle old_toggle, Toggle new_toggle) {
-                if (partType.getSelectedToggle() != null) {
-                    System.out.println(partType.getSelectedToggle().getUserData().toString());
+                if (partType.getSelectedToggle().equals(tbInhouse)) {
+                    companyNameLabel.setVisible(false);
+                    companyNameText.setVisible(false);
+                    machineIdLabel.setVisible(true);
+                    machineIdText.setVisible(true);
+                } else if (partType.getSelectedToggle().equals(tbOutsourced)){
+                    companyNameLabel.setVisible(true);
+                    companyNameText.setVisible(true);
+                    machineIdLabel.setVisible(false);
+                    machineIdText.setVisible(false);
                 }
             }
         });
@@ -71,32 +85,13 @@ public class ModifyPartController {
         this.dialogStage = dialogStage;
     }
 
-    @FXML
-    protected void onInhouseRadioButtonSelected() {
-        companyNameLabel.setVisible(false);
-        companyNameText.setVisible(false);
-        machineIdLabel.setVisible(true);
-        machineIdText.setVisible(true);
-    }
-
-    /**
-     * Hides MachineID and shows CompanyName.
-     */
-    @FXML
-    protected void onOutsourcedRadioButtonSelected() {
-        companyNameLabel.setVisible(true);
-        companyNameText.setVisible(true);
-        machineIdLabel.setVisible(false);
-        machineIdText.setVisible(false);
-    }
-
-
     /** Modify Part Button
      *
      * @param part
      */
     private void modifyPart(Part part) {
         // Fill the labels with info from the part object.
+        this.part= part;
         idLabel.setText(Integer.toString(part.getPartID()));
         nameLabel.setText(part.getName());
         invLabel.setText(Integer.toString(part.getInstock()));
@@ -109,6 +104,7 @@ public class ModifyPartController {
 
     public boolean isSaveClicked(){return saveClicked;}
 
+    @FXML
     private void handleSave(){
         if (partType.getSelectedToggle().equals(tbInhouse)){
             part.setPartID(Integer.parseInt(idLabel.getText()));
@@ -138,5 +134,13 @@ public class ModifyPartController {
             alert.showAndWait();
 
         }
+    }
+
+    /**
+     * Called when the user clicks cancel.
+     */
+    @FXML
+    private void handleCancel() {
+        dialogStage.close();
     }
 }
