@@ -1,22 +1,51 @@
 package wgu.view;
 
+import javafx.beans.property.*;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import wgu.MainApp;
 import wgu.model.InHouse;
 import wgu.model.Part;
+import wgu.model.Product;
+
 import java.io.IOException;
+
+
 
 /**
  * Created by jreis on 2/27/2017.
  */
 public class InventoryManagement {
 
+
+    @FXML
+    private TableView<Product> productTable;
+    @FXML
+    private TableColumn<Product, SimpleIntegerProperty> productIdColumn;
+    @FXML
+    private TableColumn<Product, SimpleStringProperty> productNameColumn;
+    @FXML
+    private TableColumn<Product, SimpleIntegerProperty> productInvColumn;
+    @FXML
+    private TableColumn<Product, SimpleDoubleProperty> productPriceColumn;
+
+    @FXML
+    private TableView<Part> partTable;
+    @FXML
+    private TableColumn<Part, SimpleIntegerProperty> partIDColumn;
+    @FXML
+    private TableColumn<Part, SimpleStringProperty> partNameColumn;
+    @FXML
+    private TableColumn<Part, SimpleIntegerProperty> partInvColumn;
+    @FXML
+    private TableColumn<Part, SimpleDoubleProperty> partPriceColumn;
     // Reference to the main application.
     private MainApp mainApp;
 
@@ -24,7 +53,19 @@ public class InventoryManagement {
      * The constructor.
      * The constructor is called before the initialize() method.
      */
-    public PersonOverviewController() {
+    public InventoryOverviewController() {
+        // Initialize the part table with the two columns.
+        partNameColumn.setCellValueFactory(
+                cellData -> cellData.getValue().partNameProperty());
+        partIDColumn.setCellValueFactory(
+                cellData -> cellData.getValue().partIDProperty());
+
+        // Clear person details.
+        showPartDetails(null);
+
+        // Listen for selection changes and show the part details when changed.
+        partTable.getSelectionModel().selectedItemProperty().addListener(
+                (observable, oldValue, newValue) -> showPartDetails(newValue));
     }
 
     /**
@@ -58,7 +99,7 @@ public class InventoryManagement {
         if (selectedPart != null) {
             boolean okClicked = mainApp.showModifyPartDialog(selectedPart);
             if (okClicked) {
-                showPersonDetails(selectedPerson);
+                showPartDetails(selectedPart);
             }
 
         } else {
