@@ -22,11 +22,11 @@ public class Product{
      */
     private static AtomicInteger next_id = new AtomicInteger(0);  // <-- static, class-wide counter
     private ArrayList<Part> parts;
-    private SimpleStringProperty name;
-    private SimpleDoubleProperty price;
-    private SimpleIntegerProperty instock;
-    private SimpleIntegerProperty min;
-    private SimpleIntegerProperty max;
+    private SimpleStringProperty productName;
+    private SimpleDoubleProperty productPrice;
+    private SimpleIntegerProperty productInstock;
+    private SimpleIntegerProperty productMin;
+    private SimpleIntegerProperty productMax;
     private SimpleIntegerProperty productID;
 
     /** Add part to parts arraylist

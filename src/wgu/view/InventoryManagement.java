@@ -28,9 +28,9 @@ public class InventoryManagement {
     @FXML
     private TableView<Product> productTable;
     @FXML
-    private TableColumn<Product, SimpleIntegerProperty> productIdColumn;
+    private TableColumn<Product, Integer> productIdColumn;
     @FXML
-    private TableColumn<Product, SimpleStringProperty> productNameColumn;
+    private TableColumn<Product, String> productNameColumn;
     @FXML
     private TableColumn<Product, SimpleIntegerProperty> productInvColumn;
     @FXML
@@ -39,13 +39,13 @@ public class InventoryManagement {
     @FXML
     private TableView<Part> partTable;
     @FXML
-    private TableColumn<Part, SimpleIntegerProperty> partIdColumn;
+    private TableColumn<Part, Integer> partIdColumn;
     @FXML
-    private TableColumn<Part, SimpleStringProperty> partNameColumn;
+    private TableColumn<Part, String> partNameColumn;
     @FXML
-    private TableColumn<Part, SimpleIntegerProperty> partInvColumn;
+    private TableColumn<Part, Integer> partInvColumn;
     @FXML
-    private TableColumn<Part, SimpleDoubleProperty> partPriceColumn;
+    private TableColumn<Part, Double> partPriceColumn;
     // Reference to the main application.
     private MainApp mainApp;
 
@@ -54,18 +54,26 @@ public class InventoryManagement {
      * The constructor is called before the initialize() method.
      */
     public InventoryOverviewController() {
-        // Initialize the part table with the two columns.
+        // Initialize the part table with the 4 columns.
+        partIdColumn.setCellValueFactory(
+                cellData -> cellData.getValue().partIDProperty().asObject());
         partNameColumn.setCellValueFactory(
                 cellData -> cellData.getValue().partNameProperty());
-        partIdColumn.setCellValueFactory(
-                cellData -> cellData.getValue().partIDProperty());
+        partInvColumn.setCellValueFactory(
+                cellData -> cellData.getValue().partInStockProperty().asObject());
+        partPriceColumn.setCellValueFactory(
+                cellData -> cellData.getValue().partPriceProperty().asObject());
 
-        // Clear part details.
-        showPartDetails(null);
+        //Initialize the product table with the 4 columns.
+        productIdColumn.setCellValueFactory(
+                cellData -> cellData.getValue().partIDProperty().asObject());
+        productNameColumn.setCellValueFactory(
+                cellData -> cellData.getValue().partNameProperty());
+        productInvColumn.setCellValueFactory(
+                cellData -> cellData.getValue().partInStockProperty().asObject());
+        productPriceColumn.setCellValueFactory(
+                cellData -> cellData.getValue().productPriceProperty().asObject());
 
-        // Listen for selection changes and show the part details when changed.
-        partTable.getSelectionModel().selectedItemProperty().addListener(
-                (observable, oldValue, newValue) -> showPartDetails(newValue));
     }
 
 
@@ -91,6 +99,8 @@ public class InventoryManagement {
         // Add observable list data to the table
         partTable.setItems(mainApp.getPartData());
     }
+
+
 
     /** Modify Part Button
      *
