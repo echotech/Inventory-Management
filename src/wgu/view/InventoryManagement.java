@@ -39,7 +39,7 @@ public class InventoryManagement {
     @FXML
     private TableView<Part> partTable;
     @FXML
-    private TableColumn<Part, SimpleIntegerProperty> partIDColumn;
+    private TableColumn<Part, SimpleIntegerProperty> partIdColumn;
     @FXML
     private TableColumn<Part, SimpleStringProperty> partNameColumn;
     @FXML
@@ -57,16 +57,18 @@ public class InventoryManagement {
         // Initialize the part table with the two columns.
         partNameColumn.setCellValueFactory(
                 cellData -> cellData.getValue().partNameProperty());
-        partIDColumn.setCellValueFactory(
+        partIdColumn.setCellValueFactory(
                 cellData -> cellData.getValue().partIDProperty());
 
-        // Clear person details.
+        // Clear part details.
         showPartDetails(null);
 
         // Listen for selection changes and show the part details when changed.
         partTable.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue) -> showPartDetails(newValue));
     }
+
+
 
     /**
      * Initializes the controller class. This method is automatically called
@@ -87,7 +89,7 @@ public class InventoryManagement {
         this.mainApp = mainApp;
 
         // Add observable list data to the table
-        personTable.setItems(mainApp.getPersonData());
+        partTable.setItems(mainApp.getPartData());
     }
 
     /** Modify Part Button
