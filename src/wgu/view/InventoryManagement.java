@@ -62,7 +62,7 @@ public class InventoryManagement {
         partInvColumn.setCellValueFactory(
                 cellData -> cellData.getValue().partInStockProperty().asObject());
         partPriceColumn.setCellValueFactory(
-                cellData -> cellData.getValue().partPriceProperty().asObject()); 
+                cellData -> cellData.getValue().partPriceProperty().asObject());
 
         //Initialize the product table with the 4 columns.
         productIdColumn.setCellValueFactory(
@@ -110,9 +110,7 @@ public class InventoryManagement {
         Part selectedPart = partTable.getSelectionModel().getSelectedItem();
         if (selectedPart != null) {
             boolean okClicked = mainApp.showModifyPartDialog(selectedPart);
-            if (okClicked) {
-                showPartDetails(selectedPart);
-            }
+            
 
         } else {
             // Nothing selected.
