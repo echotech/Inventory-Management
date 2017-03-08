@@ -62,7 +62,7 @@ public class InventoryManagement {
         partInvColumn.setCellValueFactory(
                 cellData -> cellData.getValue().partInStockProperty().asObject());
         partPriceColumn.setCellValueFactory(
-                cellData -> cellData.getValue().partPriceProperty().asObject());
+                cellData -> cellData.getValue().partPriceProperty().asObject()); 
 
         //Initialize the product table with the 4 columns.
         productIdColumn.setCellValueFactory(
