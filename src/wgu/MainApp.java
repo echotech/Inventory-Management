@@ -25,7 +25,7 @@ import wgu.view.InventoryManagement;
 public class MainApp extends Application {
 
     private Stage primaryStage;
-    private AnchorPane rootLayout;
+    private BorderPane rootLayout;
     @FXML
     private Scene addPart, modPart, modProduct;
     @FXML

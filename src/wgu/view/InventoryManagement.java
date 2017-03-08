@@ -182,7 +182,7 @@ public class InventoryManagement {
             // Show the dialog and wait until the user closes it
             dialogStage.showAndWait();
 
-            return controller.isOkClicked();
+            return controller.isSaveClicked();
         } catch (IOException e) {
             e.printStackTrace();
             return false;
