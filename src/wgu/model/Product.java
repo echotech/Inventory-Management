@@ -46,6 +46,7 @@ public class Product{
     public int getProductID(){return productID.get();}
     public SimpleIntegerProperty productIDProperty(){return productID;}
 
+
     /** Add part to parts arraylist
      *
      * @param var

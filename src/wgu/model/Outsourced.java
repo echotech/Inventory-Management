@@ -20,7 +20,7 @@ public class Outsourced extends Part{
         return companyName.get();
     }
 
-    public StringProperty nameProperty(){return companyName;}
+    public StringProperty companyNameProperty(){return companyName;}
 
     public void setCompanyPhone(String companyPhone) {
         this.companyPhone.set(companyPhone);
