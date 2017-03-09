@@ -29,6 +29,31 @@ public class Product{
     private SimpleIntegerProperty productMax;
     private SimpleIntegerProperty productID;
 
+    //Setters and Getters
+    public void setProductName(String name){this.productName.set(name);}
+    public String getProductName(){return productName.get();}
+    public SimpleStringProperty productNameProperty(){return productName;}
+
+    public void setProductPrice(Double price){this.productPrice.set(price);}
+    public Double getProductPrice(){return productPrice.get();}
+    public SimpleDoubleProperty productPriceProperty(){return productPrice;}
+
+    public void setProductInstock(int amt){this.productInstock.set(amt);}
+    public int getProductInstock(){return productInstock.get();}
+    public SimpleIntegerProperty productInStockProperty(){return productInstock;}
+
+    public void setProductMin(int min){this.productMin.set(min);}
+    public int getProductMin(){return productMin.get();}
+    public SimpleIntegerProperty productMinProperty(){return productMin;}
+
+    public void setProductMax(int max){this.productMax.set(max);}
+    public int getProductMax(){return productMax.get();}
+    public SimpleIntegerProperty productMaxProperty(){return productMax;}
+
+    public void setProductID(int id){this.productID.set(next_id.incrementAndGet());  }
+    public int getProductID(){return productID.get();}
+    public SimpleIntegerProperty productIDProperty(){return productID;}
+
     /** Add part to parts arraylist
      *
      * @param var

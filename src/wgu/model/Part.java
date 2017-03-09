@@ -19,24 +19,24 @@ public abstract class Part{
     private SimpleIntegerProperty partID;
 
     //Setters and Getters
-    public void setName(String name){this.partName.set(name);}
-    public String getName(){return partName.get();}
+    public void setPartName(String name){this.partName.set(name);}
+    public String getPartName(){return partName.get();}
     public SimpleStringProperty partNameProperty(){return partName;}
 
-    public void setPrice(Double price){this.partPrice.set(price);}
-    public Double getPrice(){return partPrice.get();}
+    public void setPartPrice(Double price){this.partPrice.set(price);}
+    public Double getPartPrice(){return partPrice.get();}
     public SimpleDoubleProperty partPriceProperty(){return partPrice;}
 
-    public void setInstock(int amt){this.partInstock.set(amt);}
-    public int getInstock(){return partInstock.get();}
+    public void setPartInstock(int amt){this.partInstock.set(amt);}
+    public int getPartInstock(){return partInstock.get();}
     public SimpleIntegerProperty partInStockProperty(){return partInstock;}
 
-    public void setMin(int min){this.partMin.set(min);}
-    public int getMin(){return partMin.get();}
+    public void setPartMin(int min){this.partMin.set(min);}
+    public int getPartMin(){return partMin.get();}
     public SimpleIntegerProperty partMinProperty(){return partMin;}
 
-    public void setMax(int max){this.partMax.set(max);}
-    public int getMax(){return partMax.get();}
+    public void setPartMax(int max){this.partMax.set(max);}
+    public int getPartMax(){return partMax.get();}
     public SimpleIntegerProperty partMaxProperty(){return partMax;}
 
     public void setPartID(int id){this.partID.set(next_id.incrementAndGet());  }
