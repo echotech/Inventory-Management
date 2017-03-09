@@ -82,6 +82,7 @@ public class ModifyPartController {
     }
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
+    }
 
     public void setDialogStage(Stage dialogStage) {
         this.dialogStage = dialogStage;
