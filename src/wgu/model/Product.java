@@ -98,29 +98,6 @@ public class Product{
 
    }
 
-    public void setInstock(int amt){this.instock.set(amt);}
-
-    public int getInstock(){return instock.get();}
-
-    public SimpleIntegerProperty inStockProperty(){return instock;}
-
-    public void setMin(int min){this.min.set(min);}
-
-    public int getMin(){return min.get();}
-
-    public SimpleIntegerProperty minProperty(){return min;}
-
-    public void setMax(int max){this.max.set(max);}
-
-    public int getMax(){return max.get();}
-
-    public SimpleIntegerProperty maxProperty(){return max;}
-
-    public void setProductID(int id){this.productID.set(next_id.incrementAndGet());  }
-
-    public int getProductID(){return productID.get();}
-
-    public SimpleIntegerProperty productIDProperty(){return productID;}
 
 
 }
