@@ -32,7 +32,7 @@ public class Product{
 
     public void setProductInstock(int amt){this.productInstock.set(amt);}
     public int getProductInstock(){return productInstock.get();}
-    public SimpleIntegerProperty productInStockProperty(){return productInstock;}
+    public SimpleIntegerProperty productInstockProperty(){return productInstock;}
 
     public void setProductMin(int min){this.productMin.set(min);}
     public int getProductMin(){return productMin.get();}

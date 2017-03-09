@@ -9,6 +9,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.ToggleButton;
 import javafx.stage.Stage;
+import wgu.MainApp;
 import wgu.model.InHouse;
 import wgu.model.Outsourced;
 import wgu.model.Part;
@@ -79,7 +80,8 @@ public class ModifyPartController {
             }
         });
     }
-
+    public void setMainApp(MainApp mainApp) {
+        this.mainApp = mainApp;
 
     public void setDialogStage(Stage dialogStage) {
         this.dialogStage = dialogStage;
@@ -93,11 +95,11 @@ public class ModifyPartController {
         // Fill the labels with info from the part object.
         this.part= part;
         idLabel.setText(Integer.toString(part.getPartID()));
-        nameLabel.setText(part.getName());
-        invLabel.setText(Integer.toString(part.getInstock()));
-        priceLabel.setText(Double.toString(part.getPrice()));
-        minLabel.setText(Integer.toString(part.getMin()));
-        maxLabel.setText(Integer.toString(part.getMax()));
+        nameLabel.setText(part.getPartName());
+        invLabel.setText(Integer.toString(part.getPartInstock()));
+        priceLabel.setText(Double.toString(part.getPartPrice()));
+        minLabel.setText(Integer.toString(part.getPartMin()));
+        maxLabel.setText(Integer.toString(part.getPartMax()));
         companyNameLabel.setText(((Outsourced)part).getCompanyName());
         machineIdLabel.setText(Integer.toString(((InHouse)part).getMachineID()));
     }
@@ -108,19 +110,19 @@ public class ModifyPartController {
     private void handleSave(){
         if (partType.getSelectedToggle().equals(tbInhouse)){
             part.setPartID(Integer.parseInt(idLabel.getText()));
-            part.setName(nameLabel.getText());
-            part.setInstock(Integer.parseInt(invLabel.getText());
-            part.setPrice(Double.parseDouble(priceLabel.getText()));
-            part.setMin(Integer.parseInt(minLabel.getText()));
-            part.setMax(Integer.parseInt(maxLabel.getText()));
+            part.setPartName(nameLabel.getText());
+            part.setPartInstock(Integer.parseInt(invLabel.getText());
+            part.setPartPrice(Double.parseDouble(priceLabel.getText()));
+            part.setPartMin(Integer.parseInt(minLabel.getText()));
+            part.setPartMax(Integer.parseInt(maxLabel.getText()));
             ((InHouse)part).setMachineID(Integer.parseInt(machineIdLabel.getText()));
         } else if (partType.getSelectedToggle().equals(tbOutsourced)){
             part.setPartID(Integer.parseInt(idLabel.getText()));
-            part.setName(nameLabel.getText());
-            part.setInstock(Integer.parseInt(invLabel.getText());
-            part.setPrice(Double.parseDouble(priceLabel.getText()));
-            part.setMin(Integer.parseInt(minLabel.getText()));
-            part.setMax(Integer.parseInt(maxLabel.getText()));
+            part.setPartName(nameLabel.getText());
+            part.setPartInstock(Integer.parseInt(invLabel.getText());
+            part.setPartPrice(Double.parseDouble(priceLabel.getText()));
+            part.setPartMin(Integer.parseInt(minLabel.getText()));
+            part.setPartMax(Integer.parseInt(maxLabel.getText()));
             ((Outsourced)part).setCompanyName(companyNameLabel.getText());
 
         } else {

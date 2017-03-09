@@ -20,6 +20,7 @@ import wgu.model.Part;
 import wgu.model.Product;
 import wgu.view.AddPartController;
 import wgu.view.InventoryManagement;
+import wgu.view.ModifyPartController;
 
 
 public class MainApp extends Application {
@@ -83,6 +84,22 @@ public class MainApp extends Application {
             controller.setMainApp(this);
 
         } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void showModifyPartDialog(){
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainApp.class.getResource("view/ModifyPart.fxml"));
+            AnchorPane modifyPartDialog = (AnchorPane) loader.load();
+
+            rootLayout.setCenter(modifyPartDialog);
+
+            ModifyPartController controller = loader.getController();
+            controller.setMainApp(this);
+
+        } catch (IOException e){
             e.printStackTrace();
         }
     }

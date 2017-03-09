@@ -32,9 +32,9 @@ public class InventoryManagement {
     @FXML
     private TableColumn<Product, String> productNameColumn;
     @FXML
-    private TableColumn<Product, SimpleIntegerProperty> productInvColumn;
+    private TableColumn<Product, Integer> productInvColumn;
     @FXML
-    private TableColumn<Product, SimpleDoubleProperty> productPriceColumn;
+    private TableColumn<Product, Double> productPriceColumn;
 
     @FXML
     private TableView<Part> partTable;
@@ -66,11 +66,11 @@ public class InventoryManagement {
 
         //Initialize the product table with the 4 columns.
         productIdColumn.setCellValueFactory(
-                cellData -> cellData.getValue().partIDProperty().asObject());
+                cellData -> cellData.getValue().productIDProperty().asObject());
         productNameColumn.setCellValueFactory(
-                cellData -> cellData.getValue().partNameProperty());
+                cellData -> cellData.getValue().productNameProperty());
         productInvColumn.setCellValueFactory(
-                cellData -> cellData.getValue().partInStockProperty().asObject());
+                cellData -> cellData.getValue().productInstockProperty().asObject());
         productPriceColumn.setCellValueFactory(
                 cellData -> cellData.getValue().productPriceProperty().asObject());
 
@@ -98,6 +98,7 @@ public class InventoryManagement {
 
         // Add observable list data to the table
         partTable.setItems(mainApp.getPartData());
+        productTable.setItems(mainApp.getProductData());
     }
 
 
@@ -109,7 +110,7 @@ public class InventoryManagement {
     private void handleModifyPart(Part part) {
         Part selectedPart = partTable.getSelectionModel().getSelectedItem();
         if (selectedPart != null) {
-            boolean okClicked = mainApp.showModifyPartDialog(selectedPart);
+            boolean saveClicked = mainApp.showModifyPartDialog(selectedPart);
             
 
         } else {
