@@ -1,16 +1,8 @@
 package wgu.model;
 
 import javafx.beans.property.*;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.scene.layout.AnchorPane;
-import wgu.MainApp;
-
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.concurrent.atomic.AtomicInteger;
-import static java.lang.System.out;
 
 /**
  * Created by jreis on 2/2/2017.
