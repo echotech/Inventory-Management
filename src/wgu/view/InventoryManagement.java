@@ -1,10 +1,12 @@
 package wgu.view;
 
 import javafx.beans.property.*;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
@@ -46,6 +48,10 @@ public class InventoryManagement {
     private TableColumn<Part, Integer> partInvColumn;
     @FXML
     private TableColumn<Part, Double> partPriceColumn;
+    @FXML
+    private Scene addPart, modPart, modProduct;
+    @FXML
+    private Button exitBtn, modPartBtn, addPartBtn, delPartBtn, searchPartBtn, modProdBtn, addProdBtn, delProdBtn, searchProdBtn;
     // Reference to the main application.
     private MainApp mainApp;
 
@@ -100,6 +106,7 @@ public class InventoryManagement {
         partTable.setItems(mainApp.getPartData());
         productTable.setItems(mainApp.getProductData());
     }
+
 
 
 
@@ -165,7 +172,7 @@ public class InventoryManagement {
 
     @FXML
     private void handleExit() {
-        primaryStage.close();}
+        mainApp.primaryStage.close();}
 
 
     public void addPart(Part add){

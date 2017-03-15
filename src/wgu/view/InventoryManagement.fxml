@@ -44,7 +44,7 @@
                   <ButtonBar layoutX="102.0" layoutY="425.0" prefHeight="40.0" prefWidth="200.0" AnchorPane.rightAnchor="-42.0" AnchorPane.topAnchor="425.0">
                      <buttons>
                         <Button mnemonicParsing="false" text="Add" />
-                        <Button mnemonicParsing="false" text="Modify" />
+                        <Button fx:id="modProduct" mnemonicParsing="false" text="Modify" />
                         <Button mnemonicParsing="false" text="Delete" />
                      </buttons>
                      <padding>
@@ -54,7 +54,7 @@
                   <Pane layoutY="429.0" prefHeight="37.0" prefWidth="103.0" AnchorPane.topAnchor="429.0">
                      <children>
                         <TextField layoutY="6.0" prefHeight="25.0" prefWidth="45.0" />
-                        <Button layoutX="48.0" layoutY="6.0" mnemonicParsing="false" text="Search" />
+                        <Button fx:id="searchProdBtn" layoutX="48.0" layoutY="6.0" mnemonicParsing="false" text="Search" />
                      </children>
                   </Pane>
                </children>

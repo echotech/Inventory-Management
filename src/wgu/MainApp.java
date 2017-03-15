@@ -3,6 +3,8 @@ package wgu;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -25,17 +27,34 @@ import wgu.view.ModifyPartController;
 
 public class MainApp extends Application {
 
-    private Stage primaryStage;
+    public Stage primaryStage;
     private BorderPane rootLayout;
-    @FXML
-    private Scene addPart, modPart, modProduct;
-    @FXML
-    private Button exitBtn, modPartBtn, addPartBtn, delPartBtn, searchPartBtn, modProdBtn, addProdBtn, delProdBtn, searchProdBtn;
+
     @FXML
     private TableView<Product> productTable;
     @FXML
     private TableColumn<Product, String> productStringTableColumn;
 
+    /**
+     * The data as an observable list of Parts and Products.
+     */
+    private ObservableList<Part> partData = FXCollections.observableArrayList();
+    private ObservableList<Product> productData = FXCollections.observableArrayList();
+
+    public MainApp(){
+        partData.add(new InHouse());
+        productData.add(new Product());
+    }
+
+    /**
+     * Return data in partTable as observable list
+     */
+    public ObservableList<Part> getPartData(){return partData;}
+
+    /**
+     * Return data in partTable as observable list
+     */
+    public ObservableList<Product> getProductData(){return productData;}
 
     @Override
     public void start(Stage primaryStage) {
@@ -88,19 +107,32 @@ public class MainApp extends Application {
         }
     }
 
-    public void showModifyPartDialog(){
+    public boolean showModifyPartDialog(Part part){
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainApp.class.getResource("view/ModifyPart.fxml"));
-            AnchorPane modifyPartDialog = (AnchorPane) loader.load();
+            AnchorPane page = (AnchorPane) loader.load();
 
-            rootLayout.setCenter(modifyPartDialog);
+            // Create the dialog Stage.
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle("Modify Part");
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initOwner(primaryStage);
+            Scene scene = new Scene(page);
+            dialogStage.setScene(scene);
 
+            // Set the person into the controller.
             ModifyPartController controller = loader.getController();
-            controller.setMainApp(this);
+            controller.setDialogStage(dialogStage);
+            controller.setPart(part);
 
-        } catch (IOException e){
+            // Show the dialog and wait until the user closes it
+            dialogStage.showAndWait();
+
+            return controller.isSaveClicked();
+        } catch (IOException e) {
             e.printStackTrace();
+            return false;
         }
     }
 

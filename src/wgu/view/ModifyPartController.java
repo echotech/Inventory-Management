@@ -92,7 +92,7 @@ public class ModifyPartController {
      *
      * @param part
      */
-    private void modifyPart(Part part) {
+    public void setPart(Part part) {
         // Fill the labels with info from the part object.
         this.part= part;
         idLabel.setText(Integer.toString(part.getPartID()));
