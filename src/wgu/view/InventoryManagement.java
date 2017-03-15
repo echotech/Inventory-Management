@@ -52,6 +52,7 @@ public class InventoryManagement {
     private Scene addPart, modPart, modProduct;
     @FXML
     private Button exitBtn, modPartBtn, addPartBtn, delPartBtn, searchPartBtn, modProdBtn, addProdBtn, delProdBtn, searchProdBtn;
+
     // Reference to the main application.
     private MainApp mainApp;
 
@@ -92,6 +93,7 @@ public class InventoryManagement {
     @FXML
     private void initialize() {
 
+
     }
 
     /**
@@ -105,6 +107,8 @@ public class InventoryManagement {
         // Add observable list data to the table
         partTable.setItems(mainApp.getPartData());
         productTable.setItems(mainApp.getProductData());
+
+        Button exitBtn = new Button();
     }
 
 

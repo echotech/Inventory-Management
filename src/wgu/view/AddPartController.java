@@ -72,11 +72,11 @@ public class AddPartController {
         this.out = out;
 
         idField.setText(Integer.toString(out.getPartID()));
-        nameField.setText(out.getName());
-        invField.setText(Integer.toString(out.getInstock()));
-        costField.setText(Double.toString(out.getPrice()));
-        minField.setText(Integer.toString(out.getMin()));
-        maxField.setText(Integer.toString(out.getMax()));
+        nameField.setText(out.getPartName());
+        invField.setText(Integer.toString(out.getPartInstock()));
+        costField.setText(Double.toString(out.getPartPrice()));
+        minField.setText(Integer.toString(out.getPartMin()));
+        maxField.setText(Integer.toString(out.getPartMax()));
         companyField.setText(out.getCompanyName());
            }
 
@@ -84,11 +84,11 @@ public class AddPartController {
         this.in = in;
 
         idField.setText(Integer.toString(in.getPartID()));
-        nameField.setText(in.getName());
-        invField.setText(Integer.toString(in.getInstock()));
-        costField.setText(Double.toString(in.getPrice()));
-        minField.setText(Integer.toString(in.getMin()));
-        maxField.setText(Integer.toString(in.getMax()));
+        nameField.setText(out.getPartName());
+        invField.setText(Integer.toString(out.getPartInstock()));
+        costField.setText(Double.toString(out.getPartPrice()));
+        minField.setText(Integer.toString(out.getPartMin()));
+        maxField.setText(Integer.toString(out.getPartMax()));
         machineIDField.setText(Integer.toString(in.getMachineID()));
 
     }
