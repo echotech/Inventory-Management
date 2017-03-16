@@ -129,7 +129,6 @@ public class InventoryManagement {
 
 
 
-
     /** Modify Part Button
      *
      * @param part
@@ -173,6 +172,7 @@ public class InventoryManagement {
         }
     }
 
+    @FXML
     private void handleDeleteProduct() {
         int selectedIndex = productTable.getSelectionModel().getSelectedIndex();
         if (selectedIndex >= 0) {
@@ -194,66 +194,21 @@ public class InventoryManagement {
     private void handleExit() {
         mainApp.primaryStage.close();}
 
+    //TODO figure out how to open the dialogue even though I can't instantiate an abstract class
     @FXML
     public void handleAddPart(Part add){
-        try {
-            // Load the fxml file and create a new stage for the popup dialog.
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("view/AddPart.fxml"));
-            AnchorPane page = (AnchorPane) loader.load();
+       Part tempPart = new Part();
 
-            // Create the dialog Stage.
-            Stage dialogStage = new Stage();
-            dialogStage.setTitle("Add Part");
-            dialogStage.initModality(Modality.WINDOW_MODAL);
-            dialogStage.initOwner(mainApp.primaryStage);
-            Scene scene = new Scene(page);
-            dialogStage.setScene(scene);
-
-            // Set the person into the controller.
-            AddPartController controller = loader.getController();
-            controller.setDialogStage(dialogStage);
-
-
-            // Show the dialog and wait until the user closes it
-            dialogStage.showAndWait();
-
-            return controller.isSaveClicked();
-        } catch (IOException e) {
-            e.printStackTrace();
-            return false;
-        }
     }
 
     @FXML
     public void handleAddProduct(Product add){
-        try {
-            // Load the fxml file and create a new stage for the popup dialog.
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("view/AddProduct.fxml"));
-            AnchorPane page = (AnchorPane) loader.load();
+       Product tempProduct = new Product();
+       boolean saveClicked = mainApp.showAddProductDialogue(tempProduct);
+       if (saveClicked){
+           mainApp.getProductData().add(tempProduct);
+       }
 
-            // Create the dialog Stage.
-            Stage dialogStage = new Stage();
-            dialogStage.setTitle("Add Part");
-            dialogStage.initModality(Modality.WINDOW_MODAL);
-            dialogStage.initOwner(mainApp.primaryStage);
-            Scene scene = new Scene(page);
-            dialogStage.setScene(scene);
-
-            // Set the person into the controller.
-            AddPartController controller = loader.getController();
-            controller.setDialogStage(dialogStage);
-
-
-            // Show the dialog and wait until the user closes it
-            dialogStage.showAndWait();
-
-            return controller.isSaveClicked();
-        } catch (IOException e) {
-            e.printStackTrace();
-            return false;
-        }
     }
 
     public boolean removeProduct(int rem){
