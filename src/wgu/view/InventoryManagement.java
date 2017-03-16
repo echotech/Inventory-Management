@@ -51,7 +51,23 @@ public class InventoryManagement {
     @FXML
     private Scene addPart, modPart, modProduct;
     @FXML
-    private Button exitBtn, modPartBtn, addPartBtn, delPartBtn, searchPartBtn, modProdBtn, addProdBtn, delProdBtn, searchProdBtn;
+    Button exitBtn;
+    @FXML
+    Button modPartBtn;
+    @FXML
+    Button addPartBtn;
+    @FXML
+    Button delPartBtn;
+    @FXML
+    Button searchPartBtn;
+    @FXML
+    Button modProdBtn;
+    @FXML
+    Button addProdBtn;
+    @FXML
+    Button delProdBtn;
+    @FXML
+    Button searchProdBtn;
 
     // Reference to the main application.
     private MainApp mainApp;
@@ -178,8 +194,8 @@ public class InventoryManagement {
     private void handleExit() {
         mainApp.primaryStage.close();}
 
-
-    public void addPart(Part add){
+    @FXML
+    public void handleAddPart(Part add){
         try {
             // Load the fxml file and create a new stage for the popup dialog.
             FXMLLoader loader = new FXMLLoader();
@@ -188,16 +204,47 @@ public class InventoryManagement {
 
             // Create the dialog Stage.
             Stage dialogStage = new Stage();
-            dialogStage.setTitle("Edit Part");
+            dialogStage.setTitle("Add Part");
             dialogStage.initModality(Modality.WINDOW_MODAL);
-            dialogStage.initOwner(primaryStage);
+            dialogStage.initOwner(mainApp.primaryStage);
             Scene scene = new Scene(page);
             dialogStage.setScene(scene);
 
             // Set the person into the controller.
             AddPartController controller = loader.getController();
             controller.setDialogStage(dialogStage);
-            controller.setPart(part);
+
+
+            // Show the dialog and wait until the user closes it
+            dialogStage.showAndWait();
+
+            return controller.isSaveClicked();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    @FXML
+    public void handleAddProduct(Product add){
+        try {
+            // Load the fxml file and create a new stage for the popup dialog.
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainApp.class.getResource("view/AddProduct.fxml"));
+            AnchorPane page = (AnchorPane) loader.load();
+
+            // Create the dialog Stage.
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle("Add Part");
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initOwner(mainApp.primaryStage);
+            Scene scene = new Scene(page);
+            dialogStage.setScene(scene);
+
+            // Set the person into the controller.
+            AddPartController controller = loader.getController();
+            controller.setDialogStage(dialogStage);
+
 
             // Show the dialog and wait until the user closes it
             dialogStage.showAndWait();
