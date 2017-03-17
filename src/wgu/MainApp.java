@@ -135,6 +135,7 @@ public class MainApp extends Application {
             return false;
         }
     }
+
  //TODO Implement ModifyProductController
     public boolean showModifyProductDialog(Product prod){
         try {

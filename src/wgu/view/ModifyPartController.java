@@ -110,6 +110,7 @@ public class ModifyPartController {
     @FXML
     private void handleSave(){
         if (partType.getSelectedToggle().equals(tbInhouse)){
+            Part part = new InHouse();
             part.setPartID(Integer.parseInt(idLabel.getText()));
             part.setPartName(nameLabel.getText());
             part.setPartInstock(Integer.parseInt(invLabel.getText());
@@ -118,6 +119,7 @@ public class ModifyPartController {
             part.setPartMax(Integer.parseInt(maxLabel.getText()));
             ((InHouse)part).setMachineID(Integer.parseInt(machineIdLabel.getText()));
         } else if (partType.getSelectedToggle().equals(tbOutsourced)){
+            Part part = new Outsourced();
             part.setPartID(Integer.parseInt(idLabel.getText()));
             part.setPartName(nameLabel.getText());
             part.setPartInstock(Integer.parseInt(invLabel.getText());

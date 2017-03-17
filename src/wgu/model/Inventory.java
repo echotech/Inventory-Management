@@ -7,16 +7,17 @@ import java.util.ArrayList;
  */
 public class Inventory {
 
-    private ArrayList<Product> products;
+    private ArrayList<Product> allProducts;
+    private ArrayList<Part> allParts;
 
-    public void addProduct(Product p){ products.add(p);}
+    public void addProduct(Product p){ allProducts.add(p);}
 
     public boolean removeProduct(int rem){
-        return products.removeIf(part -> part.getProductID()==rem);
+        return allProducts.removeIf(part -> part.getProductID()==rem);
     }
 
     public Product lookupProduct(int id) throws Exception{
-        for (Product prod : products) {
+        for (Product prod : allProducts) {
             if (prod.getProductID()==(id)) {
                 return prod;
             }
