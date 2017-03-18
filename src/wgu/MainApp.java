@@ -1,7 +1,6 @@
 package wgu;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -9,8 +8,6 @@ import javafx.fxml.FXML;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
@@ -20,7 +17,6 @@ import javafx.stage.Stage;
 import wgu.model.InHouse;
 import wgu.model.Part;
 import wgu.model.Product;
-import wgu.view.AddPartController;
 import wgu.view.InventoryManagement;
 import wgu.view.ModifyPartController;
 
@@ -151,7 +147,7 @@ public class MainApp extends Application {
             Scene scene = new Scene(page);
             dialogStage.setScene(scene);
 
-            // Set the person into the controller.
+            // Set the product into the controller.
             ModifyProductController controller = loader.getController();
             controller.setDialogStage(dialogStage);
             controller.setProduct(prod);
@@ -165,6 +161,8 @@ public class MainApp extends Application {
             return false;
         }
     }
+
+    
 
 
     /**

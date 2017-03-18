@@ -196,8 +196,11 @@ public class InventoryManagement {
 
     //TODO figure out how to open the dialogue even though I can't instantiate an abstract class
     @FXML
-    public void handleAddPart(Part add){
-       Part tempPart = new Part();
+    public void handleAddPart(Part tempPart){
+       boolean saveClicked= mainApp.showModifyPartDialog();
+       if(saveClicked){
+           mainApp.getPartData().add(tempPart);
+       }
 
     }
 
