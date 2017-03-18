@@ -124,7 +124,7 @@ public class InventoryManagement {
         partTable.setItems(mainApp.getPartData());
         productTable.setItems(mainApp.getProductData());
 
-        Button exitBtn = new Button();
+
     }
 
 
@@ -197,22 +197,25 @@ public class InventoryManagement {
     //TODO figure out how to open the dialogue even though I can't instantiate an abstract class
     @FXML
     public void handleAddPart(Part tempPart){
-       boolean saveClicked= mainApp.showModifyPartDialog();
+       boolean saveClicked= mainApp.showModifyPartDialog(tempPart);
        if(saveClicked){
            mainApp.getPartData().add(tempPart);
        }
 
     }
 
+    //TODO Implement add product
+    /*
     @FXML
     public void handleAddProduct(Product add){
        Product tempProduct = new Product();
-       boolean saveClicked = mainApp.showAddProductDialogue(tempProduct);
+       boolean saveClicked = mainApp.showModifyProductDialogue(tempProduct);
        if (saveClicked){
            mainApp.getProductData().add(tempProduct);
        }
 
     }
+    */
 
     public boolean removeProduct(int rem){
         //code to remove product

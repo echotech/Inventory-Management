@@ -82,7 +82,7 @@ public class MainApp extends Application {
     }
 
     /**
-     * Shows the person overview inside the root layout.
+     * Shows the overview inside the root layout.
      */
     public void showInventoryManagement() {
         try {
@@ -133,6 +133,7 @@ public class MainApp extends Application {
     }
 
  //TODO Implement ModifyProductController
+    /*
     public boolean showModifyProductDialog(Product prod){
         try {
             FXMLLoader loader = new FXMLLoader();
@@ -161,8 +162,9 @@ public class MainApp extends Application {
             return false;
         }
     }
+    */
 
-    
+
 
 
     /**

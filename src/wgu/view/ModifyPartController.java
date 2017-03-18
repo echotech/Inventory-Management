@@ -53,6 +53,9 @@ public class ModifyPartController {
     private Stage dialogStage;
     private Part part;
     private boolean saveClicked= false;
+    // Reference to the main application.
+    private MainApp mainApp;
+
 
 
 
