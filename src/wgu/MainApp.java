@@ -58,6 +58,7 @@ public class MainApp extends Application {
         this.primaryStage.setTitle("Inventory Management");
 
         initRootLayout();
+        showInventoryManagement();
 
 
     }
