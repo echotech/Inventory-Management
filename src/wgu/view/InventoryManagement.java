@@ -76,7 +76,7 @@ public class InventoryManagement {
      * The constructor.
      * The constructor is called before the initialize() method.
      */
-    public InventoryOverviewController() {
+    public void InventoryOverviewController() {
         // Initialize the part table with the 4 columns.
         partIdColumn.setCellValueFactory(
                 cellData -> cellData.getValue().partIDProperty().asObject());

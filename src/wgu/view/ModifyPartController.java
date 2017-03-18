@@ -116,7 +116,7 @@ public class ModifyPartController {
             Part part = new InHouse();
             part.setPartID(Integer.parseInt(idLabel.getText()));
             part.setPartName(nameLabel.getText());
-            part.setPartInstock(Integer.parseInt(invLabel.getText());
+            part.setPartInstock(Integer.parseInt(invLabel.getText()));
             part.setPartPrice(Double.parseDouble(priceLabel.getText()));
             part.setPartMin(Integer.parseInt(minLabel.getText()));
             part.setPartMax(Integer.parseInt(maxLabel.getText()));
@@ -125,7 +125,7 @@ public class ModifyPartController {
             Part part = new Outsourced();
             part.setPartID(Integer.parseInt(idLabel.getText()));
             part.setPartName(nameLabel.getText());
-            part.setPartInstock(Integer.parseInt(invLabel.getText());
+            part.setPartInstock(Integer.parseInt(invLabel.getText()));
             part.setPartPrice(Double.parseDouble(priceLabel.getText()));
             part.setPartMin(Integer.parseInt(minLabel.getText()));
             part.setPartMax(Integer.parseInt(maxLabel.getText()));
