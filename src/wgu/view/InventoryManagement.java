@@ -151,6 +151,19 @@ public class InventoryManagement {
         }
     }
 
+    /**
+     * Called when user clicks new button
+     */
+    @FXML
+    public void handleAddPart(){
+
+        boolean saveClicked = mainApp.showModifyPartDialog();
+        if (saveClicked){
+
+            mainApp.getPartData().add(tempProduct);
+        }
+
+    }
 
     /**
      * Called when the user clicks on the delete button.
