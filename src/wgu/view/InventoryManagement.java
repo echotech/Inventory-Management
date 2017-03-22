@@ -133,6 +133,7 @@ public class InventoryManagement {
      *
      * @param part
      */
+    @FXML
     private void handleModifyPart(Part part) {
         Part selectedPart = partTable.getSelectionModel().getSelectedItem();
         if (selectedPart != null) {
@@ -144,8 +145,8 @@ public class InventoryManagement {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.initOwner(mainApp.getPrimaryStage());
             alert.setTitle("No Selection");
-            alert.setHeaderText("No Person Selected");
-            alert.setContentText("Please select a person in the table.");
+            alert.setHeaderText("No Part Selected");
+            alert.setContentText("Please select a part in the table.");
 
             alert.showAndWait();
         }
@@ -156,11 +157,10 @@ public class InventoryManagement {
      */
     @FXML
     public void handleAddPart(){
-
+        Part tempPart = new InHouse();
         boolean saveClicked = mainApp.showModifyPartDialog();
         if (saveClicked){
-
-            mainApp.getPartData().add(tempProduct);
+            mainApp.getPartData().add(tempPart);
         }
 
     }

@@ -45,13 +45,12 @@ public abstract class Part{
 
     //Constructors
     public Part(){}
-    public Part(SimpleIntegerProperty ID, SimpleStringProperty name, SimpleDoubleProperty partPrice, SimpleIntegerProperty partInstock, SimpleIntegerProperty partMin, SimpleIntegerProperty partMax){
+    public Part(SimpleIntegerProperty ID, SimpleStringProperty name, SimpleDoubleProperty partPrice, SimpleIntegerProperty partInstock){
         this.partID=ID;
         this.partName=name;
         this.partPrice=partPrice;
         this.partInstock=partInstock;
-        this.partMin=partMin;
-        this.partMax=partMax;
+
     }
 
 

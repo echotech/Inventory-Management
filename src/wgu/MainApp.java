@@ -2,6 +2,9 @@ package wgu;
 
 import java.io.IOException;
 
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -38,7 +41,8 @@ public class MainApp extends Application {
     private ObservableList<Product> productData = FXCollections.observableArrayList();
 
     public MainApp(){
-        partData.add(new InHouse());
+
+        partData.add(new InHouse(new SimpleIntegerProperty(1), new SimpleStringProperty("Stupid part"), new SimpleDoubleProperty(3.50), new SimpleIntegerProperty(100)));
         productData.add(new Product());
     }
 
