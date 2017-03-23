@@ -97,6 +97,8 @@ public class InventoryManagement {
         productPriceColumn.setCellValueFactory(
                 cellData -> cellData.getValue().productPriceProperty().asObject());
 
+        
+
     }
 
 
