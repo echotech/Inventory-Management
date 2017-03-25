@@ -76,6 +76,17 @@ public class InventoryManagement {
      * The constructor is called before the initialize() method.
      */
     public void InventoryOverviewController() {
+    }
+
+
+
+    /**
+     * Initializes the controller class. This method is automatically called
+     * after the fxml file has been loaded.
+     */
+
+    @FXML
+    private void initialize() {
         // Initialize the part table with the 4 columns.
         partIdColumn.setCellValueFactory(
                 cellData -> cellData.getValue().partIDProperty().asObject());
@@ -96,21 +107,6 @@ public class InventoryManagement {
         productPriceColumn.setCellValueFactory(
                 cellData -> cellData.getValue().productPriceProperty().asObject());
 
-        
-
-    }
-
-
-
-    /**
-     * Initializes the controller class. This method is automatically called
-     * after the fxml file has been loaded.
-     */
-
-    @FXML
-    private void initialize() {
-
-
     }
 
     /**
@@ -128,73 +124,15 @@ public class InventoryManagement {
 
     }
 
-    public boolean showModifyPartDialog(){
-        try {
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("view/ModifyPart.fxml"));
-            AnchorPane page = (AnchorPane) loader.load();
-
-            // Create the dialog Stage.
-            Stage dialogStage = new Stage();
-            dialogStage.setTitle("Modify Part");
-            dialogStage.initModality(Modality.WINDOW_MODAL);
-            dialogStage.initOwner(mainApp.primaryStage);
-            Scene scene = new Scene(page);
-            dialogStage.setScene(scene);
-
-            // Set the person into the controller.
-            ModifyPartController controller = loader.getController();
-            controller.setDialogStage(dialogStage);
-
-
-            // Show the dialog and wait until the user closes it
-            dialogStage.showAndWait();
-
-            return controller.isSaveClicked();
-        } catch (IOException e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
-
-    public boolean showModifyPartDialog(Part part){
-        try {
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("view/ModifyPart.fxml"));
-            AnchorPane page = (AnchorPane) loader.load();
-
-            // Create the dialog Stage.
-            Stage dialogStage = new Stage();
-            dialogStage.setTitle("Modify Part");
-            dialogStage.initModality(Modality.WINDOW_MODAL);
-            dialogStage.initOwner(mainApp.primaryStage);
-            Scene scene = new Scene(page);
-            dialogStage.setScene(scene);
-
-            // Set the person into the controller.
-            ModifyPartController controller = loader.getController();
-            controller.setDialogStage(dialogStage);
-            controller.setPart(part);
-
-            // Show the dialog and wait until the user closes it
-            dialogStage.showAndWait();
-
-            return controller.isSaveClicked();
-        } catch (IOException e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
-
     /** Modify Part Button
      *
      * @param part
      */
     @FXML
-    private void handleModifyPart(Part part) {
+    private void handleModifyPart() {
         Part selectedPart = partTable.getSelectionModel().getSelectedItem();
         if (selectedPart != null) {
-            boolean saveClicked = showModifyPartDialog(selectedPart);
+            boolean saveClicked = mainApp.showModifyPartDialog(selectedPart);
             
 
         } else {
@@ -214,10 +152,10 @@ public class InventoryManagement {
      */
     @FXML
     public void handleAddPart(){
-        Part tempPart = new InHouse();
-        boolean saveClicked = showModifyPartDialog();
+
+        boolean saveClicked = mainApp.showModifyPartDialog();
         if (saveClicked){
-            mainApp.getPartData().add(tempPart);
+            mainApp.getPartData();
         }
 
     }
@@ -264,15 +202,6 @@ public class InventoryManagement {
     private void handleExit() {
         mainApp.primaryStage.close();}
 
-    //TODO figure out how to open the dialogue even though I can't instantiate an abstract class
-    @FXML
-    public void handleAddPart(Part tempPart){
-       boolean saveClicked= showModifyPartDialog(tempPart);
-       if(saveClicked){
-           mainApp.getPartData().add(tempPart);
-       }
-
-    }
 
     //TODO Implement add product
     /*
