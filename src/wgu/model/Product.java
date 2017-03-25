@@ -21,6 +21,15 @@ public class Product{
     private SimpleIntegerProperty productMax;
     private SimpleIntegerProperty productID;
 
+    //Constructors
+    public Product(){}
+    public Product(Integer id, String name, Integer instock, Double price ){
+        this.productID=new SimpleIntegerProperty(id);
+        this.productName=new SimpleStringProperty(name);
+        this.productInstock=new SimpleIntegerProperty(instock);
+        this.productPrice=new SimpleDoubleProperty(price);
+    }
+
     //Setters and Getters
     public void setProductName(String name){this.productName.set(name);}
     public String getProductName(){return productName.get();}

@@ -43,18 +43,8 @@ public class MainApp extends Application {
     public MainApp(){
 
         partData.add(new InHouse(new SimpleIntegerProperty(1), new SimpleStringProperty("Stupid part"), new SimpleDoubleProperty(3.50), new SimpleIntegerProperty(100)));
-        productData.add(new Product());
+        productData.add(new Product(1, "Prod1", 2, 3.50));
     }
-
-    /**
-     * Return data in partTable as observable list
-     */
-    public ObservableList<Part> getPartData(){return partData;}
-
-    /**
-     * Return data in partTable as observable list
-     */
-    public ObservableList<Product> getProductData(){return productData;}
 
     @Override
     public void start(Stage primaryStage) {
@@ -66,6 +56,19 @@ public class MainApp extends Application {
 
 
     }
+
+
+    /**
+     * Return data in partTable as observable list
+     */
+    public ObservableList<Part> getPartData(){return partData;}
+
+    /**
+     * Return data in partTable as observable list
+     */
+    public ObservableList<Product> getProductData(){return productData;}
+
+
 
     /**
      * Initializes the root layout.
@@ -108,63 +111,7 @@ public class MainApp extends Application {
         }
     }
 
-    public boolean showModifyPartDialog(){
-        try {
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("view/ModifyPart.fxml"));
-            AnchorPane page = (AnchorPane) loader.load();
 
-            // Create the dialog Stage.
-            Stage dialogStage = new Stage();
-            dialogStage.setTitle("Modify Part");
-            dialogStage.initModality(Modality.WINDOW_MODAL);
-            dialogStage.initOwner(primaryStage);
-            Scene scene = new Scene(page);
-            dialogStage.setScene(scene);
-
-            // Set the person into the controller.
-            ModifyPartController controller = loader.getController();
-            controller.setDialogStage(dialogStage);
-
-
-            // Show the dialog and wait until the user closes it
-            dialogStage.showAndWait();
-
-            return controller.isSaveClicked();
-        } catch (IOException e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
-
-    public boolean showModifyPartDialog(Part part){
-        try {
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("view/ModifyPart.fxml"));
-            AnchorPane page = (AnchorPane) loader.load();
-
-            // Create the dialog Stage.
-            Stage dialogStage = new Stage();
-            dialogStage.setTitle("Modify Part");
-            dialogStage.initModality(Modality.WINDOW_MODAL);
-            dialogStage.initOwner(primaryStage);
-            Scene scene = new Scene(page);
-            dialogStage.setScene(scene);
-
-            // Set the person into the controller.
-            ModifyPartController controller = loader.getController();
-            controller.setDialogStage(dialogStage);
-            controller.setPart(part);
-
-            // Show the dialog and wait until the user closes it
-            dialogStage.showAndWait();
-
-            return controller.isSaveClicked();
-        } catch (IOException e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
 
  //TODO Implement ModifyProductController
     /*

@@ -27,6 +27,7 @@ import java.io.IOException;
 public class InventoryManagement {
 
 
+
     @FXML
     private TableView<Product> productTable;
     @FXML
@@ -48,8 +49,6 @@ public class InventoryManagement {
     private TableColumn<Part, Integer> partInvColumn;
     @FXML
     private TableColumn<Part, Double> partPriceColumn;
-    @FXML
-    private Scene addPart, modPart, modProduct;
     @FXML
     Button exitBtn;
     @FXML
@@ -129,7 +128,63 @@ public class InventoryManagement {
 
     }
 
+    public boolean showModifyPartDialog(){
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainApp.class.getResource("view/ModifyPart.fxml"));
+            AnchorPane page = (AnchorPane) loader.load();
 
+            // Create the dialog Stage.
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle("Modify Part");
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initOwner(mainApp.primaryStage);
+            Scene scene = new Scene(page);
+            dialogStage.setScene(scene);
+
+            // Set the person into the controller.
+            ModifyPartController controller = loader.getController();
+            controller.setDialogStage(dialogStage);
+
+
+            // Show the dialog and wait until the user closes it
+            dialogStage.showAndWait();
+
+            return controller.isSaveClicked();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean showModifyPartDialog(Part part){
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainApp.class.getResource("view/ModifyPart.fxml"));
+            AnchorPane page = (AnchorPane) loader.load();
+
+            // Create the dialog Stage.
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle("Modify Part");
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initOwner(mainApp.primaryStage);
+            Scene scene = new Scene(page);
+            dialogStage.setScene(scene);
+
+            // Set the person into the controller.
+            ModifyPartController controller = loader.getController();
+            controller.setDialogStage(dialogStage);
+            controller.setPart(part);
+
+            // Show the dialog and wait until the user closes it
+            dialogStage.showAndWait();
+
+            return controller.isSaveClicked();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 
     /** Modify Part Button
      *
@@ -139,7 +194,7 @@ public class InventoryManagement {
     private void handleModifyPart(Part part) {
         Part selectedPart = partTable.getSelectionModel().getSelectedItem();
         if (selectedPart != null) {
-            boolean saveClicked = mainApp.showModifyPartDialog(selectedPart);
+            boolean saveClicked = showModifyPartDialog(selectedPart);
             
 
         } else {
@@ -160,7 +215,7 @@ public class InventoryManagement {
     @FXML
     public void handleAddPart(){
         Part tempPart = new InHouse();
-        boolean saveClicked = mainApp.showModifyPartDialog();
+        boolean saveClicked = showModifyPartDialog();
         if (saveClicked){
             mainApp.getPartData().add(tempPart);
         }
@@ -212,7 +267,7 @@ public class InventoryManagement {
     //TODO figure out how to open the dialogue even though I can't instantiate an abstract class
     @FXML
     public void handleAddPart(Part tempPart){
-       boolean saveClicked= mainApp.showModifyPartDialog(tempPart);
+       boolean saveClicked= showModifyPartDialog(tempPart);
        if(saveClicked){
            mainApp.getPartData().add(tempPart);
        }
