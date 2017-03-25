@@ -133,7 +133,11 @@ public class InventoryManagement {
         Part selectedPart = partTable.getSelectionModel().getSelectedItem();
         if (selectedPart != null) {
             boolean saveClicked = mainApp.showModifyPartDialog(selectedPart);
-            
+            if (saveClicked){
+                //TODO figure out what to put here.
+                partTable.getColumns().get(0).setVisible(false);
+                partTable.getColumns().get(0).setVisible(true);
+            }
 
         } else {
             // Nothing selected.
@@ -152,7 +156,7 @@ public class InventoryManagement {
      */
     @FXML
     public void handleAddPart(){
-
+//TODO Fix this to actually work.
         boolean saveClicked = mainApp.showModifyPartDialog();
         if (saveClicked){
             mainApp.getPartData();
