@@ -56,10 +56,14 @@ public class ModifyPartController {
 
     @FXML
     private void initialize() {
-
         tbInhouse.setToggleGroup(partType);
         tbOutsourced.setToggleGroup(partType);
         tbInhouse.setSelected(true);
+    }
+
+    @FXML
+    private void toggle(){
+
 
         partType.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
             public void changed(ObservableValue<? extends Toggle> ov,
@@ -78,7 +82,6 @@ public class ModifyPartController {
             }
         });
     }
-
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
     }

@@ -11,26 +11,26 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="388.0" prefWidth="307.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="wgu.view.ModifyPartController">
     <children>
-        <Text layoutX="14.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Modify Part">
+        <Text layoutX="14.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add/Modify Part">
             <font>
                 <Font name="System Bold" size="14.0" />
             </font>
         </Text>
-        <AnchorPane layoutX="88.0" layoutY="15.0" prefHeight="32.0" prefWidth="196.0">
+        <AnchorPane layoutX="90.0" layoutY="24.0" prefHeight="32.0" prefWidth="196.0">
             <children>
-                <RadioButton fx:id="tbInhouse" layoutX="14.0" layoutY="8.0" mnemonicParsing="false" onAction="#initialize" text="In-House">
+                <RadioButton fx:id="tbInhouse" layoutX="14.0" layoutY="8.0" mnemonicParsing="false" onAction="#toggle" text="In-House">
                     <toggleGroup>
                         <ToggleGroup fx:id="partType" />
                     </toggleGroup>
                 </RadioButton>
-                <RadioButton fx:id="tbOutsourced" layoutX="103.0" layoutY="8.0" mnemonicParsing="false" onAction="#initialize" text="Outsourced" toggleGroup="$partType" />
+                <RadioButton fx:id="tbOutsourced" layoutX="103.0" layoutY="8.0" mnemonicParsing="false" onAction="#toggle" text="Outsourced" toggleGroup="$partType" />
             </children>
         </AnchorPane>
         <AnchorPane layoutX="14.0" layoutY="47.0" prefHeight="314.0" prefWidth="272.0">
             <children>
                 <AnchorPane layoutX="8.0" layoutY="14.0" prefHeight="32.0" prefWidth="260.0">
                     <children>
-                        <TextField fx:id="idLabel" editable="false" layoutX="130.0" layoutY="2.0" prefHeight="25.0" prefWidth="116.0" promptText="Auto-Generated" />
+                        <TextField fx:id="idLabel" layoutX="130.0" layoutY="2.0" prefHeight="25.0" prefWidth="116.0" promptText="Auto-Generated" />
                         <Text layoutX="54.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ID" />
                     </children>
                 </AnchorPane>

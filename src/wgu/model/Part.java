@@ -81,7 +81,7 @@ public abstract class Part {
     }
 
     public void setPartID(int id) {
-        this.partID.set(next_id.incrementAndGet());
+        this.partID.set(id);
     }
 
     public int getPartID() {
@@ -94,6 +94,7 @@ public abstract class Part {
 
     //Constructors
     public Part() {
+       // this.partID.set(next_id.incrementAndGet());
     }
 
     public Part(SimpleIntegerProperty ID, SimpleStringProperty name, SimpleDoubleProperty partPrice, SimpleIntegerProperty partInstock) {
