@@ -1,14 +1,12 @@
 package wgu;
 
-import java.io.IOException;
-
+import javafx.application.Application;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
@@ -22,6 +20,8 @@ import wgu.model.Part;
 import wgu.model.Product;
 import wgu.view.InventoryManagement;
 import wgu.view.ModifyPartController;
+
+import java.io.IOException;
 
 
 public class MainApp extends Application {
@@ -40,7 +40,7 @@ public class MainApp extends Application {
     private ObservableList<Part> partData = FXCollections.observableArrayList();
     private ObservableList<Product> productData = FXCollections.observableArrayList();
 
-    public MainApp(){
+    public MainApp() {
 
         partData.add(new InHouse(new SimpleIntegerProperty(1), new SimpleStringProperty("Stupid part"), new SimpleDoubleProperty(3.50), new SimpleIntegerProperty(100)));
         productData.add(new Product(1, "Prod1", 2, 3.50));
@@ -61,13 +61,16 @@ public class MainApp extends Application {
     /**
      * Return data in partTable as observable list
      */
-    public ObservableList<Part> getPartData(){return partData;}
+    public ObservableList<Part> getPartData() {
+        return partData;
+    }
 
     /**
      * Return data in partTable as observable list
      */
-    public ObservableList<Product> getProductData(){return productData;}
-
+    public ObservableList<Product> getProductData() {
+        return productData;
+    }
 
 
     /**
@@ -111,7 +114,7 @@ public class MainApp extends Application {
         }
     }
 
-    public boolean showModifyPartDialog(){
+    public boolean showModifyPartDialog() {
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainApp.class.getResource("view/ModifyPart.fxml"));
@@ -126,10 +129,10 @@ public class MainApp extends Application {
             dialogStage.setScene(scene);
 
             // Set the part into the controller.
-            Part tempPart = new InHouse();
+            //Part tempPart = new InHouse();
             ModifyPartController controller = loader.getController();
             controller.setDialogStage(dialogStage);
-            controller.setPart(tempPart);
+            //controller.setPart(tempPart);
 
 
             // Show the dialog and wait until the user closes it
@@ -142,7 +145,7 @@ public class MainApp extends Application {
         }
     }
 
-    public boolean showModifyPartDialog(Part part){
+    public boolean showModifyPartDialog(Part part) {
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainApp.class.getResource("view/ModifyPart.fxml"));
@@ -172,7 +175,7 @@ public class MainApp extends Application {
     }
 
 
- //TODO Implement ModifyProductController
+    //TODO Implement ModifyProductController
     /*
     public boolean showModifyProductDialog(Product prod){
         try {
@@ -205,10 +208,9 @@ public class MainApp extends Application {
     */
 
 
-
-
     /**
      * Returns the main stage.
+     *
      * @return
      */
     public Stage getPrimaryStage() {

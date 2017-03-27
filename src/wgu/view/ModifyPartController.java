@@ -3,11 +3,8 @@ package wgu.view;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.ToggleGroup;
-import javafx.scene.control.ToggleButton;
 import javafx.stage.Stage;
 import wgu.MainApp;
 import wgu.model.InHouse;
@@ -20,21 +17,21 @@ import wgu.model.Part;
 public class ModifyPartController {
 
     @FXML
-    private Label idLabel;
+    private TextField idLabel;
     @FXML
-    private Label nameLabel;
+    private TextField nameLabel;
     @FXML
-    private Label invLabel;
+    private TextField invLabel;
     @FXML
-    private Label priceLabel;
+    private TextField priceLabel;
     @FXML
-    private Label minLabel;
+    private TextField minLabel;
     @FXML
-    private Label maxLabel;
+    private TextField maxLabel;
     @FXML
-    private Label companyNameLabel;
+    private TextField companyNameLabel;
     @FXML
-    private Label machineIdLabel;
+    private TextField machineIdLabel;
     @FXML
     private TextField companyNameText;
     @FXML
@@ -52,15 +49,13 @@ public class ModifyPartController {
 
     private Stage dialogStage;
     private Part part;
-    private boolean saveClicked= false;
+    private boolean saveClicked = false;
     // Reference to the main application.
     private MainApp mainApp;
 
 
-
-
     @FXML
-    private void initialize(){
+    private void initialize() {
 
         tbInhouse.setToggleGroup(partType);
         tbOutsourced.setToggleGroup(partType);
@@ -74,7 +69,7 @@ public class ModifyPartController {
                     companyNameText.setVisible(false);
                     machineIdLabel.setVisible(true);
                     machineIdText.setVisible(true);
-                } else if (partType.getSelectedToggle().equals(tbOutsourced)){
+                } else if (partType.getSelectedToggle().equals(tbOutsourced)) {
                     companyNameLabel.setVisible(true);
                     companyNameText.setVisible(true);
                     machineIdLabel.setVisible(false);
@@ -83,6 +78,7 @@ public class ModifyPartController {
             }
         });
     }
+
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
     }
@@ -91,28 +87,31 @@ public class ModifyPartController {
         this.dialogStage = dialogStage;
     }
 
-    /** Modify Part Button
+    /**
+     * Modify Part Button
      *
      * @param part
      */
     public void setPart(Part part) {
         // Fill the labels with info from the part object.
-        this.part= part;
+        this.part = part;
         idLabel.setText(Integer.toString(part.getPartID()));
         nameLabel.setText(part.getPartName());
         invLabel.setText(Integer.toString(part.getPartInstock()));
         priceLabel.setText(Double.toString(part.getPartPrice()));
         minLabel.setText(Integer.toString(part.getPartMin()));
         maxLabel.setText(Integer.toString(part.getPartMax()));
-        companyNameLabel.setText(((Outsourced)part).getCompanyName());
-        machineIdLabel.setText(Integer.toString(((InHouse)part).getMachineID()));
+        companyNameLabel.setText(((Outsourced) part).getCompanyName());
+        machineIdLabel.setText(Integer.toString(((InHouse) part).getMachineID()));
     }
 
-    public boolean isSaveClicked(){return saveClicked;}
+    public boolean isSaveClicked() {
+        return saveClicked;
+    }
 
     @FXML
-    private void handleSave(){
-        if (partType.getSelectedToggle().equals(tbInhouse)){
+    private void handleSave() {
+        if (partType.getSelectedToggle().equals(tbInhouse)) {
             Part part = new InHouse();
             part.setPartID(Integer.parseInt(idLabel.getText()));
             part.setPartName(nameLabel.getText());
@@ -120,12 +119,12 @@ public class ModifyPartController {
             part.setPartPrice(Double.parseDouble(priceLabel.getText()));
             part.setPartMin(Integer.parseInt(minLabel.getText()));
             part.setPartMax(Integer.parseInt(maxLabel.getText()));
-            ((InHouse)part).setMachineID(Integer.parseInt(machineIdLabel.getText()));
+            ((InHouse) part).setMachineID(Integer.parseInt(machineIdLabel.getText()));
 
-            saveClicked=true;
+            saveClicked = true;
             dialogStage.close();
 
-        } else if (partType.getSelectedToggle().equals(tbOutsourced)){
+        } else if (partType.getSelectedToggle().equals(tbOutsourced)) {
             Part part = new Outsourced();
             part.setPartID(Integer.parseInt(idLabel.getText()));
             part.setPartName(nameLabel.getText());
@@ -133,9 +132,9 @@ public class ModifyPartController {
             part.setPartPrice(Double.parseDouble(priceLabel.getText()));
             part.setPartMin(Integer.parseInt(minLabel.getText()));
             part.setPartMax(Integer.parseInt(maxLabel.getText()));
-            ((Outsourced)part).setCompanyName(companyNameLabel.getText());
+            ((Outsourced) part).setCompanyName(companyNameLabel.getText());
 
-            saveClicked=true;
+            saveClicked = true;
             dialogStage.close();
         } else {
             // Show the error message.

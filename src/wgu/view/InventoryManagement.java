@@ -1,31 +1,20 @@
 package wgu.view;
 
-import javafx.beans.property.*;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.layout.AnchorPane;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
 import wgu.MainApp;
 import wgu.model.InHouse;
 import wgu.model.Part;
 import wgu.model.Product;
-
-import java.io.IOException;
-
 
 
 /**
  * Created by jreis on 2/27/2017.
  */
 public class InventoryManagement {
-
 
 
     @FXML
@@ -79,7 +68,6 @@ public class InventoryManagement {
     }
 
 
-
     /**
      * Initializes the controller class. This method is automatically called
      * after the fxml file has been loaded.
@@ -124,17 +112,17 @@ public class InventoryManagement {
 
     }
 
-    /** Modify Part Button
-     *
-     * @param part
+    /**
+     * Modify Part Button
+     * edit details of existing part.
      */
     @FXML
     private void handleModifyPart() {
         Part selectedPart = partTable.getSelectionModel().getSelectedItem();
         if (selectedPart != null) {
             boolean saveClicked = mainApp.showModifyPartDialog(selectedPart);
-            if (saveClicked){
-                //TODO figure out what to put here.
+            if (saveClicked) {
+
                 partTable.getColumns().get(0).setVisible(false);
                 partTable.getColumns().get(0).setVisible(true);
             }
@@ -155,10 +143,10 @@ public class InventoryManagement {
      * Called when user clicks new button
      */
     @FXML
-    public void handleAddPart(){
+    public void handleAddPart() {
 //TODO Fix this to actually work.
         boolean saveClicked = mainApp.showModifyPartDialog();
-        if (saveClicked){
+        if (saveClicked) {
             mainApp.getPartData();
         }
 
@@ -204,7 +192,8 @@ public class InventoryManagement {
 
     @FXML
     private void handleExit() {
-        mainApp.primaryStage.close();}
+        mainApp.primaryStage.close();
+    }
 
 
     //TODO Implement add product
@@ -220,17 +209,19 @@ public class InventoryManagement {
     }
     */
 
-    public boolean removeProduct(int rem){
+    public boolean removeProduct(int rem) {
         //code to remove product
 
         return true;
     }
 
-    public Part lookupProduct(int id){
-        //code to look up product
+    public Part lookupProduct(int id) {
+        //TODO lookup product
         return new InHouse();
     }
-    public void updateProduct(int prod){
-        //code to modify product
+    //TODO lookup part
+
+    public void updateProduct(int prod) {
+        //IMPLEMENTED IN handleModifyProduct
     }
 }
