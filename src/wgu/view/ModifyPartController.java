@@ -29,13 +29,13 @@ public class ModifyPartController {
     @FXML
     private TextField maxLabel;
     @FXML
-    private TextField companyNameLabel;
-    @FXML
-    private TextField machineIdLabel;
-    @FXML
     private TextField companyNameText;
     @FXML
     private TextField machineIdText;
+    @FXML
+    private Label machineIdLabel;
+    @FXML
+    private Label companyNameLabel;
     @FXML
     ToggleButton tbInhouse = new ToggleButton();
     @FXML
@@ -65,15 +65,15 @@ public class ModifyPartController {
             public void changed(ObservableValue<? extends Toggle> ov,
                                 Toggle old_toggle, Toggle new_toggle) {
                 if (partType.getSelectedToggle().equals(tbInhouse)) {
-                    companyNameLabel.setVisible(false);
                     companyNameText.setVisible(false);
-                    machineIdLabel.setVisible(true);
+                    companyNameLabel.setVisible(false);
                     machineIdText.setVisible(true);
+                    machineIdLabel.setVisible(true);
                 } else if (partType.getSelectedToggle().equals(tbOutsourced)) {
-                    companyNameLabel.setVisible(true);
                     companyNameText.setVisible(true);
-                    machineIdLabel.setVisible(false);
+                    companyNameLabel.setVisible(true);
                     machineIdText.setVisible(false);
+                    machineIdLabel.setVisible(false);
                 }
             }
         });
@@ -101,8 +101,8 @@ public class ModifyPartController {
         priceLabel.setText(Double.toString(part.getPartPrice()));
         minLabel.setText(Integer.toString(part.getPartMin()));
         maxLabel.setText(Integer.toString(part.getPartMax()));
-        companyNameLabel.setText(((Outsourced) part).getCompanyName());
-        machineIdLabel.setText(Integer.toString(((InHouse) part).getMachineID()));
+        companyNameText.setText(((Outsourced) part).getCompanyName());
+        machineIdText.setText(Integer.toString(((InHouse) part).getMachineID()));
     }
 
     public boolean isSaveClicked() {
@@ -119,7 +119,7 @@ public class ModifyPartController {
             part.setPartPrice(Double.parseDouble(priceLabel.getText()));
             part.setPartMin(Integer.parseInt(minLabel.getText()));
             part.setPartMax(Integer.parseInt(maxLabel.getText()));
-            ((InHouse) part).setMachineID(Integer.parseInt(machineIdLabel.getText()));
+            ((InHouse) part).setMachineID(Integer.parseInt(machineIdText.getText()));
 
             saveClicked = true;
             dialogStage.close();
@@ -132,7 +132,7 @@ public class ModifyPartController {
             part.setPartPrice(Double.parseDouble(priceLabel.getText()));
             part.setPartMin(Integer.parseInt(minLabel.getText()));
             part.setPartMax(Integer.parseInt(maxLabel.getText()));
-            ((Outsourced) part).setCompanyName(companyNameLabel.getText());
+            ((Outsourced) part).setCompanyName(companyNameText.getText());
 
             saveClicked = true;
             dialogStage.close();

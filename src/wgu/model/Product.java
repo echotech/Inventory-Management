@@ -26,6 +26,7 @@ public class Product {
 
     //Constructors
     public Product() {
+        this.productID = new SimpleIntegerProperty(next_id.incrementAndGet());
     }
 
     public Product(Integer id, String name, Integer instock, Double price) {
@@ -97,7 +98,7 @@ public class Product {
     }
 
     public void setProductID(int id) {
-        this.productID.set(next_id.incrementAndGet());
+        this.productID.set(id);
     }
 
     public int getProductID() {
