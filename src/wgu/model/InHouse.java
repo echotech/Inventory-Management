@@ -25,11 +25,9 @@ public class InHouse extends Part {
         return machineID;
     }
 
-    public InHouse() {
-    }
 
-    public InHouse(SimpleIntegerProperty ID, SimpleStringProperty name, SimpleDoubleProperty partPrice, SimpleIntegerProperty partInstock) {
-        super(ID, name, partPrice, partInstock);
+    public InHouse(String name, double partPrice, int partInstock) {
+        super(name, partPrice, partInstock);
 
     }
 }

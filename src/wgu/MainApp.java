@@ -42,7 +42,7 @@ public class MainApp extends Application {
 
     public MainApp() {
 
-        partData.add(new InHouse(new SimpleIntegerProperty(1), new SimpleStringProperty("Stupid part"), new SimpleDoubleProperty(3.50), new SimpleIntegerProperty(100)));
+        partData.add(new InHouse("Stupid Part", 1, 1));
         productData.add(new Product(1, "Prod1", 2, 3.50));
     }
 
@@ -64,6 +64,8 @@ public class MainApp extends Application {
     public ObservableList<Part> getPartData() {
         return partData;
     }
+
+    public void addPartData(Part part){partData.add(part);}
 
     /**
      * Return data in partTable as observable list

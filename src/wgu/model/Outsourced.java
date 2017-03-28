@@ -13,9 +13,9 @@ public class Outsourced extends Part {
     private StringProperty companyName;
     private StringProperty companyPhone;
 
-    public Outsourced(){}
-    public Outsourced(SimpleIntegerProperty ID, SimpleStringProperty name, SimpleDoubleProperty partPrice, SimpleIntegerProperty partInstock) {
-        super(ID, name, partPrice, partInstock);
+
+    public Outsourced(String name, double partPrice, int partInstock) {
+        super(name, partPrice, partInstock);
     }
 
     public void setCompanyName(String companyName) {

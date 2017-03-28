@@ -215,10 +215,9 @@ public class InventoryManagement {
         return true;
     }
 
-    public Part lookupProduct(int id) {
+
         //TODO lookup product
-        return new InHouse();
-    }
+
     //TODO lookup part
 
     public void updateProduct(int prod) {

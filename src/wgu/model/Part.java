@@ -11,7 +11,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 public abstract class Part {
 
-    private static AtomicInteger next_id = new AtomicInteger(0);
+    private static AtomicInteger nextId = new AtomicInteger(0);
     private SimpleStringProperty partName;
     private SimpleDoubleProperty partPrice;
     private SimpleIntegerProperty partInstock;
@@ -93,16 +93,13 @@ public abstract class Part {
     }
 
     //Constructors
-    public Part() {
-       // this.partID.set(next_id.incrementAndGet());
-    }
 
-    public Part(SimpleIntegerProperty ID, SimpleStringProperty name, SimpleDoubleProperty partPrice, SimpleIntegerProperty partInstock) {
-        this.partID = ID;
-        this.partName = name;
-        this.partPrice = partPrice;
-        this.partInstock = partInstock;
 
+    public Part(String name, double partPrice, int partInstock) {
+        this.partID = new SimpleIntegerProperty(nextId.incrementAndGet());
+        this.partName = new SimpleStringProperty(name);
+        this.partPrice = new SimpleDoubleProperty(partPrice);
+        this.partInstock = new SimpleIntegerProperty(partInstock);
     }
 
 

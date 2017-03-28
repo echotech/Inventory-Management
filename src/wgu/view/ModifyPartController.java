@@ -58,22 +58,17 @@ public class ModifyPartController {
     private void initialize() {
         tbInhouse.setToggleGroup(partType);
         tbOutsourced.setToggleGroup(partType);
-        tbInhouse.setSelected(true);
-    }
-
-    @FXML
-    private void toggle(){
-
-
+        //tbInhouse.setSelected(true);
         partType.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
             public void changed(ObservableValue<? extends Toggle> ov,
-                                Toggle old_toggle, Toggle new_toggle) {
-                if (partType.getSelectedToggle().equals(tbInhouse)) {
+                                Toggle oldToggle, Toggle newToggle) {
+                System.out.println("Hey " + newToggle);
+                if (newToggle.equals(tbInhouse)) {
                     companyNameText.setVisible(false);
                     companyNameLabel.setVisible(false);
                     machineIdText.setVisible(true);
                     machineIdLabel.setVisible(true);
-                } else if (partType.getSelectedToggle().equals(tbOutsourced)) {
+                } else if (newToggle.equals(tbOutsourced)) {
                     companyNameText.setVisible(true);
                     companyNameLabel.setVisible(true);
                     machineIdText.setVisible(false);
@@ -82,6 +77,8 @@ public class ModifyPartController {
             }
         });
     }
+
+
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
     }
@@ -115,27 +112,38 @@ public class ModifyPartController {
     @FXML
     private void handleSave() {
         if (partType.getSelectedToggle().equals(tbInhouse)) {
-            Part part = new InHouse();
-            part.setPartID(Integer.parseInt(idLabel.getText()));
-            part.setPartName(nameLabel.getText());
-            part.setPartInstock(Integer.parseInt(invLabel.getText()));
-            part.setPartPrice(Double.parseDouble(priceLabel.getText()));
-            part.setPartMin(Integer.parseInt(minLabel.getText()));
-            part.setPartMax(Integer.parseInt(maxLabel.getText()));
-            ((InHouse) part).setMachineID(Integer.parseInt(machineIdText.getText()));
+            Integer partInstock = Integer.parseInt(invLabel.getText());
+            String partName = nameLabel.getText();
+            Double partPrice = Double.parseDouble(priceLabel.getText());
+            Integer partMin = Integer.parseInt(minLabel.getText());
+            Integer partMax = Integer.parseInt(maxLabel.getText());
+            Integer macId = Integer.parseInt(machineIdLabel.getText());
+
+            Part ihPart = new InHouse(partName,partPrice,partInstock);
+            ihPart.setPartMin(partMin);
+            ihPart.setPartMax(partMax);
+            ((InHouse) ihPart).setMachineID(macId);
+
+            mainApp.addPartData(ihPart);
 
             saveClicked = true;
             dialogStage.close();
 
         } else if (partType.getSelectedToggle().equals(tbOutsourced)) {
-            Part part = new Outsourced();
-            part.setPartID(Integer.parseInt(idLabel.getText()));
-            part.setPartName(nameLabel.getText());
-            part.setPartInstock(Integer.parseInt(invLabel.getText()));
-            part.setPartPrice(Double.parseDouble(priceLabel.getText()));
-            part.setPartMin(Integer.parseInt(minLabel.getText()));
-            part.setPartMax(Integer.parseInt(maxLabel.getText()));
-            ((Outsourced) part).setCompanyName(companyNameText.getText());
+            Integer partInstock = Integer.parseInt(invLabel.getText());
+            String partName = nameLabel.getText();
+            Double partPrice = Double.parseDouble(priceLabel.getText());
+            Integer partMin = Integer.parseInt(minLabel.getText());
+            Integer partMax = Integer.parseInt(maxLabel.getText());
+            String compName = companyNameLabel.getText();
+
+            Part outPart = new Outsourced(partName,partPrice,partInstock);
+            outPart.setPartMin(partMin);
+            outPart.setPartMax(partMax);
+            ((Outsourced) outPart).setCompanyName(compName);
+
+            mainApp.addPartData(outPart);
+
 
             saveClicked = true;
             dialogStage.close();
