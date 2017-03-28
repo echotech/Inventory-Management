@@ -30,7 +30,7 @@
             <children>
                 <AnchorPane layoutX="8.0" layoutY="14.0" prefHeight="32.0" prefWidth="260.0">
                     <children>
-                        <TextField fx:id="idLabel" layoutX="130.0" layoutY="2.0" prefHeight="25.0" prefWidth="116.0" promptText="Auto-Generated" />
+                        <TextField fx:id="idLabel" disable="true" editable="false" layoutX="130.0" layoutY="2.0" prefHeight="25.0" prefWidth="116.0" promptText="Auto-Generated" />
                         <Text layoutX="54.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ID" />
                     </children>
                 </AnchorPane>
@@ -62,16 +62,16 @@
                 </AnchorPane>
                 <AnchorPane layoutX="9.0" layoutY="213.0" prefHeight="32.0" prefWidth="260.0">
                     <children>
-                        <TextField fx:id="companyNameText" layoutX="149.0" layoutY="2.0" prefHeight="25.0" prefWidth="97.0" promptText="Company" />
-                  <Label fx:id="companyNameLabel" layoutX="52.0" layoutY="6.0" text="Company Name" />
+                        <TextField fx:id="companyNameLabel" layoutX="149.0" layoutY="2.0" prefHeight="25.0" prefWidth="97.0" promptText="Company" />
+                  <Label fx:id="companyNameText" layoutX="52.0" layoutY="6.0" text="Company Name" />
                     </children>
                 </AnchorPane>
                 <Button fx:id="save" defaultButton="true" layoutX="150.0" layoutY="291.0" mnemonicParsing="false" onAction="#handleSave" text="Save" />
                 <Button fx:id="cancel" cancelButton="true" layoutX="206.0" layoutY="291.0" mnemonicParsing="false" onAction="#handleCancel" text="Cancel" />
                 <AnchorPane layoutX="8.0" layoutY="251.0" prefHeight="32.0" prefWidth="260.0">
                     <children>
-                        <TextField fx:id="machineIdText" layoutX="149.0" layoutY="2.0" prefHeight="25.0" prefWidth="97.0" promptText="Machine ID" />
-                  <Label fx:id="machineIdLabel" layoutX="54.0" layoutY="8.0" text="Machine ID" />
+                        <TextField fx:id="machineIdLabel" layoutX="149.0" layoutY="2.0" prefHeight="25.0" prefWidth="97.0" promptText="Machine ID" />
+                  <Label fx:id="machineIdText" layoutX="54.0" layoutY="8.0" text="Machine ID" />
                     </children>
                 </AnchorPane>
             </children>

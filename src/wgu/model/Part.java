@@ -100,6 +100,8 @@ public abstract class Part {
         this.partName = new SimpleStringProperty(name);
         this.partPrice = new SimpleDoubleProperty(partPrice);
         this.partInstock = new SimpleIntegerProperty(partInstock);
+        this.partMin = new SimpleIntegerProperty(0);
+        this.partMax = new SimpleIntegerProperty(0);
     }
 
 

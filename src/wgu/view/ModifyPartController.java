@@ -29,13 +29,13 @@ public class ModifyPartController {
     @FXML
     private TextField maxLabel;
     @FXML
-    private TextField companyNameText;
+    private Label companyNameText;
     @FXML
-    private TextField machineIdText;
+    private Label machineIdText;
     @FXML
-    private Label machineIdLabel;
+    private TextField machineIdLabel;
     @FXML
-    private Label companyNameLabel;
+    private TextField companyNameLabel;
     @FXML
     ToggleButton tbInhouse = new ToggleButton();
     @FXML
@@ -58,11 +58,10 @@ public class ModifyPartController {
     private void initialize() {
         tbInhouse.setToggleGroup(partType);
         tbOutsourced.setToggleGroup(partType);
-        //tbInhouse.setSelected(true);
+
         partType.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
             public void changed(ObservableValue<? extends Toggle> ov,
                                 Toggle oldToggle, Toggle newToggle) {
-                System.out.println("Hey " + newToggle);
                 if (newToggle.equals(tbInhouse)) {
                     companyNameText.setVisible(false);
                     companyNameLabel.setVisible(false);
@@ -112,6 +111,7 @@ public class ModifyPartController {
     @FXML
     private void handleSave() {
         if (partType.getSelectedToggle().equals(tbInhouse)) {
+            try{
             Integer partInstock = Integer.parseInt(invLabel.getText());
             String partName = nameLabel.getText();
             Double partPrice = Double.parseDouble(priceLabel.getText());
@@ -119,34 +119,57 @@ public class ModifyPartController {
             Integer partMax = Integer.parseInt(maxLabel.getText());
             Integer macId = Integer.parseInt(machineIdLabel.getText());
 
-            Part ihPart = new InHouse(partName,partPrice,partInstock);
+            Part ihPart = new InHouse(partName, partPrice, partInstock);
             ihPart.setPartMin(partMin);
             ihPart.setPartMax(partMax);
             ((InHouse) ihPart).setMachineID(macId);
 
             mainApp.addPartData(ihPart);
-
             saveClicked = true;
             dialogStage.close();
+
+            } catch(NumberFormatException nfe){
+                Alert alert = new Alert(AlertType.ERROR);
+                alert.initOwner(dialogStage);
+                alert.setTitle("Invalid Fields");
+                alert.setHeaderText("Please correct invalid fields");
+                alert.setContentText("Ensure all fields have accurate data");
+
+                alert.showAndWait();
+            }
+
+
 
         } else if (partType.getSelectedToggle().equals(tbOutsourced)) {
-            Integer partInstock = Integer.parseInt(invLabel.getText());
-            String partName = nameLabel.getText();
-            Double partPrice = Double.parseDouble(priceLabel.getText());
-            Integer partMin = Integer.parseInt(minLabel.getText());
-            Integer partMax = Integer.parseInt(maxLabel.getText());
-            String compName = companyNameLabel.getText();
+            try {
+                Integer partInstock = Integer.parseInt(invLabel.getText());
+                String partName = nameLabel.getText();
+                Double partPrice = Double.parseDouble(priceLabel.getText());
+                Integer partMin = Integer.parseInt(minLabel.getText());
+                Integer partMax = Integer.parseInt(maxLabel.getText());
+                String compName = companyNameLabel.getText();
 
-            Part outPart = new Outsourced(partName,partPrice,partInstock);
-            outPart.setPartMin(partMin);
-            outPart.setPartMax(partMax);
-            ((Outsourced) outPart).setCompanyName(compName);
+                Part outPart = new Outsourced(partName, partPrice, partInstock);
+                outPart.setPartMin(partMin);
+                outPart.setPartMax(partMax);
+                ((Outsourced) outPart).setCompanyName(compName);
 
-            mainApp.addPartData(outPart);
+                mainApp.addPartData(outPart);
+                saveClicked = true;
+                dialogStage.close();
+
+            } catch(NumberFormatException nfe){
+                Alert alert = new Alert(AlertType.ERROR);
+                alert.initOwner(dialogStage);
+                alert.setTitle("Invalid Fields");
+                alert.setHeaderText("Please correct invalid fields");
+                alert.setContentText("Ensure all fields have accurate data");
+
+                alert.showAndWait();
+            }
 
 
-            saveClicked = true;
-            dialogStage.close();
+
         } else {
             // Show the error message.
             Alert alert = new Alert(AlertType.ERROR);

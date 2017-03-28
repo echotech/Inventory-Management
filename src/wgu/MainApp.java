@@ -133,7 +133,9 @@ public class MainApp extends Application {
             // Set the part into the controller.
             //Part tempPart = new InHouse();
             ModifyPartController controller = loader.getController();
+            controller.setMainApp(this);
             controller.setDialogStage(dialogStage);
+
             //controller.setPart(tempPart);
 
 
@@ -163,6 +165,7 @@ public class MainApp extends Application {
 
             // Set the part into the controller.
             ModifyPartController controller = loader.getController();
+            controller.setMainApp(this);
             controller.setDialogStage(dialogStage);
             controller.setPart(part);
 

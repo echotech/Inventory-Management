@@ -144,7 +144,7 @@ public class InventoryManagement {
      */
     @FXML
     public void handleAddPart() {
-//TODO Fix this to actually work.
+
         boolean saveClicked = mainApp.showModifyPartDialog();
         if (saveClicked) {
             mainApp.getPartData();

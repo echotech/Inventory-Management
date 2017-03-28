@@ -28,6 +28,7 @@ public class InHouse extends Part {
 
     public InHouse(String name, double partPrice, int partInstock) {
         super(name, partPrice, partInstock);
+        this.machineID = new SimpleIntegerProperty(1);
 
     }
 }
