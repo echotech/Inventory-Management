@@ -100,8 +100,22 @@ public class ModifyPartController {
         priceLabel.setText(Double.toString(part.getPartPrice()));
         minLabel.setText(Integer.toString(part.getPartMin()));
         maxLabel.setText(Integer.toString(part.getPartMax()));
-        companyNameText.setText(((Outsourced) part).getCompanyName());
-        machineIdText.setText(Integer.toString(((InHouse) part).getMachineID()));
+        //TODO SET THE TOGGLE!
+        if(part instanceof InHouse) {
+            machineIdLabel.setText(Integer.toString(((InHouse) part).getMachineID()));
+            tbInhouse.setSelected(true);
+            companyNameLabel.setVisible(false);
+            companyNameText.setVisible(false);
+            tbOutsourced.setDisable(true);
+
+        } else {
+            companyNameLabel.setText(((Outsourced) part).getCompanyName());
+            tbOutsourced.setSelected(true);
+            machineIdLabel.setVisible(false);
+            machineIdText.setVisible(false);
+            tbInhouse.setDisable(true);
+
+        }
     }
 
     public boolean isSaveClicked() {
@@ -109,9 +123,16 @@ public class ModifyPartController {
     }
 
     @FXML
-    private void handleSave() {
-        if (partType.getSelectedToggle().equals(tbInhouse)) {
-            try{
+    private void handleModifySave() {
+
+        //TODO IMPLEMENT ME!
+
+    }
+
+    @FXML
+    private void handleNewSave() {
+        if (part instanceof InHouse)) {
+           try{
             Integer partInstock = Integer.parseInt(invLabel.getText());
             String partName = nameLabel.getText();
             Double partPrice = Double.parseDouble(priceLabel.getText());
@@ -119,12 +140,13 @@ public class ModifyPartController {
             Integer partMax = Integer.parseInt(maxLabel.getText());
             Integer macId = Integer.parseInt(machineIdLabel.getText());
 
-            Part ihPart = new InHouse(partName, partPrice, partInstock);
-            ihPart.setPartMin(partMin);
-            ihPart.setPartMax(partMax);
-            ((InHouse) ihPart).setMachineID(macId);
+            part.setPartName(partName);
+            part.setPartPrice(partPrice);
+            part.setPartInstock(partInstock);
+            part.setPartMin(partMin);
+            part.setPartMax(partMax);
+            ((InHouse) part).setMachineID(macId);
 
-            mainApp.addPartData(ihPart);
             saveClicked = true;
             dialogStage.close();
 

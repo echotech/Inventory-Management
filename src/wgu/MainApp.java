@@ -116,15 +116,15 @@ public class MainApp extends Application {
         }
     }
 
-    public boolean showModifyPartDialog() {
+    public boolean showNewPartDialog() {
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("view/ModifyPart.fxml"));
+            loader.setLocation(MainApp.class.getResource("view/NewPart.fxml"));
             AnchorPane page = (AnchorPane) loader.load();
 
             // Create the dialog Stage.
             Stage dialogStage = new Stage();
-            dialogStage.setTitle("Modify Part");
+            dialogStage.setTitle("New Part");
             dialogStage.initModality(Modality.WINDOW_MODAL);
             dialogStage.initOwner(primaryStage);
             Scene scene = new Scene(page);
