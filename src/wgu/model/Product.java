@@ -15,7 +15,7 @@ public class Product {
     /**
      * Auto-generated ID variable
      */
-    private static AtomicInteger next_id = new AtomicInteger(0);  // <-- static, class-wide counter
+    private static AtomicInteger nextId = new AtomicInteger(0);  // <-- static, class-wide counter
     private ArrayList<Part> parts;
     private SimpleStringProperty productName;
     private SimpleDoubleProperty productPrice;
@@ -24,16 +24,14 @@ public class Product {
     private SimpleIntegerProperty productMax;
     private SimpleIntegerProperty productID;
 
-    //Constructors
-    public Product() {
-        this.productID = new SimpleIntegerProperty(next_id.incrementAndGet());
-    }
-
-    public Product(Integer id, String name, Integer instock, Double price) {
-        this.productID = new SimpleIntegerProperty(id);
+    //Constructor
+    public Product(String name, double productPrice, int productInstock) {
+        this.productID = new SimpleIntegerProperty(nextId.incrementAndGet());
         this.productName = new SimpleStringProperty(name);
-        this.productInstock = new SimpleIntegerProperty(instock);
-        this.productPrice = new SimpleDoubleProperty(price);
+        this.productPrice = new SimpleDoubleProperty(productPrice);
+        this.productInstock = new SimpleIntegerProperty(productInstock);
+        this.productMin = new SimpleIntegerProperty(0);
+        this.productMax = new SimpleIntegerProperty(0);
     }
 
     //Setters and Getters

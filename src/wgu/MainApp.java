@@ -20,6 +20,7 @@ import wgu.model.Part;
 import wgu.model.Product;
 import wgu.view.InventoryManagement;
 import wgu.view.ModifyPartController;
+import wgu.view.ModifyProductController;
 
 import java.io.IOException;
 
@@ -43,7 +44,7 @@ public class MainApp extends Application {
     public MainApp() {
 
         partData.add(new InHouse("Stupid Part", 1, 1));
-        productData.add(new Product(1, "Prod1", 2, 3.50));
+        productData.add(new Product( "Prod1",3.50, 1));
     }
 
     @Override
@@ -53,8 +54,6 @@ public class MainApp extends Application {
 
         initRootLayout();
         showInventoryManagement();
-
-
     }
 
 
@@ -73,6 +72,7 @@ public class MainApp extends Application {
     public ObservableList<Product> getProductData() {
         return productData;
     }
+    public void addProdData(Product prod){productData.add(prod);}
 
 
     /**
@@ -180,8 +180,6 @@ public class MainApp extends Application {
     }
 
 
-    //TODO Implement ModifyProductController
-    /*
     public boolean showModifyProductDialog(Product prod){
         try {
             FXMLLoader loader = new FXMLLoader();
@@ -198,6 +196,7 @@ public class MainApp extends Application {
 
             // Set the product into the controller.
             ModifyProductController controller = loader.getController();
+            controller.setMainApp(this);
             controller.setDialogStage(dialogStage);
             controller.setProduct(prod);
 
@@ -210,7 +209,7 @@ public class MainApp extends Application {
             return false;
         }
     }
-    */
+
 
 
     /**
