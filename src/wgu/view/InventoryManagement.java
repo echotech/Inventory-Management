@@ -1,10 +1,9 @@
 package wgu.view;
 
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import wgu.MainApp;
 import wgu.model.InHouse;
 import wgu.model.Part;
@@ -16,7 +15,10 @@ import wgu.model.Product;
  */
 public class InventoryManagement {
 
-
+    @FXML
+    private TextField searchPartTextField;
+    @FXML
+    private TextField searchProductTextField;
     @FXML
     private TableView<Product> productTable;
     @FXML
@@ -95,6 +97,34 @@ public class InventoryManagement {
         productPriceColumn.setCellValueFactory(
                 cellData -> cellData.getValue().productPriceProperty().asObject());
 
+/*
+        //Search for parts by name or ID.
+        FilteredList<Part> filteredPart = new FilteredList<>(mainApp.getPartData(), p -> true);
+
+
+        searchPartTextField.textProperty().addListener((observable, oldValue, newValue)->{
+            filteredPart.setPredicate(part ->{
+                if (newValue == null || newValue.isEmpty()){
+                    return true;
+                }
+                String lowerCaseFilter = newValue.toLowerCase();
+
+                if(Integer.toString(part.getPartID()).equals(newValue)){
+                    return true;
+                }
+                else if(part.getPartName().equals(lowerCaseFilter)){
+                    return true;
+                }
+                return false;
+            });
+        });
+
+        SortedList<Part> sortedParts = new SortedList<>(filteredPart);
+        sortedParts.comparatorProperty().bind(partTable.comparatorProperty());
+        partTable.setItems(sortedParts);
+
+        //FilteredList<Product> filteredProduct = new FilteredList<>(mainApp.getProductData(), p -> true);
+        */
     }
 
     /**
@@ -108,8 +138,6 @@ public class InventoryManagement {
         // Add observable list data to the table
         partTable.setItems(mainApp.getPartData());
         productTable.setItems(mainApp.getProductData());
-
-
     }
 
     /**
