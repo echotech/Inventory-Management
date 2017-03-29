@@ -189,6 +189,42 @@ public class InventoryManagement {
         }
     }
 
+    @FXML
+    public void handleAddProduct(){
+       Product tempProduct = new Product("Temp",1,1);
+       boolean saveClicked = mainApp.showModifyProductDialog(tempProduct);
+       if (saveClicked){
+           mainApp.getProductData().add(tempProduct);
+       }
+
+    }
+
+    /**
+     * Modify Product Button
+     * edit details of existing part.
+     */
+    @FXML
+    private void handleModifyProduct() {
+        Product selectedProduct = productTable.getSelectionModel().getSelectedItem();
+        if (selectedProduct != null) {
+            boolean saveClicked = mainApp.showModifyProductDialog(selectedProduct);
+            if (saveClicked) {
+
+                productTable.getColumns().get(0).setVisible(false);
+                productTable.getColumns().get(0).setVisible(true);
+            }
+
+        } else {
+            // Nothing selected.
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.initOwner(mainApp.getPrimaryStage());
+            alert.setTitle("No Selection");
+            alert.setHeaderText("No Part Selected");
+            alert.setContentText("Please select a part in the table.");
+
+            alert.showAndWait();
+        }
+    }
 
     @FXML
     private void handleExit() {
@@ -196,27 +232,7 @@ public class InventoryManagement {
     }
 
 
-    //TODO Implement add product
-    /*
-    @FXML
-    public void handleAddProduct(Product add){
-       Product tempProduct = new Product();
-       boolean saveClicked = mainApp.showModifyProductDialogue(tempProduct);
-       if (saveClicked){
-           mainApp.getProductData().add(tempProduct);
-       }
-
-    }
-    */
-
-    public boolean removeProduct(int rem) {
-        //code to remove product
-
-        return true;
-    }
-
-
-        //TODO lookup product
+    //TODO lookup product
 
     //TODO lookup part
 

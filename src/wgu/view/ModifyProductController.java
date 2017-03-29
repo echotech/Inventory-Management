@@ -56,7 +56,7 @@ public class ModifyProductController {
     }
 
     @FXML
-    private void handleSave() {
+    private void handleNewSave() {
         if (isInputValid()) {
             try {
                 Integer prodInstock = Integer.parseInt(invText.getText());
@@ -72,6 +72,37 @@ public class ModifyProductController {
                 prod.setProductMax(prodMax);
 
                 mainApp.addProdData(prod);
+                saveClicked = true;
+                dialogStage.close();
+
+            } catch (NumberFormatException nfe) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.initOwner(dialogStage);
+                alert.setTitle("Invalid Fields");
+                alert.setHeaderText("Please correct invalid fields");
+                alert.setContentText("Ensure all fields have accurate data");
+
+                alert.showAndWait();
+            }
+        }
+    }
+
+    @FXML
+    private void handleModSave() {
+        if (isInputValid()) {
+            try {
+                Integer prodInstock = Integer.parseInt(invText.getText());
+                String prodName = nameText.getText();
+                Double prodPrice = Double.parseDouble(priceText.getText());
+                Integer prodMin = Integer.parseInt(minText.getText());
+                Integer prodMax = Integer.parseInt(maxText.getText());
+
+                product.setProductName(prodName);
+                product.setProductPrice(prodPrice);
+                product.setProductInstock(prodInstock);
+                product.setProductMin(prodMin);
+                product.setProductMax(prodMax);
+
                 saveClicked = true;
                 dialogStage.close();
 

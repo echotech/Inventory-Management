@@ -65,7 +65,7 @@
         <Button layoutX="580.0" layoutY="200.0" mnemonicParsing="false" text="Add" />
         <ButtonBar layoutX="439.0" layoutY="353.0" prefHeight="40.0" prefWidth="190.0">
             <buttons>
-                <Button defaultButton="true" mnemonicParsing="false" onAction="#handleModSave" text="Save" />
+                <Button defaultButton="true" mnemonicParsing="false" onAction="#handleNewSave" text="Save" />
                 <Button cancelButton="true" mnemonicParsing="false" onAction="#handleCancel" text="Cancel" />
             </buttons>
             <padding>

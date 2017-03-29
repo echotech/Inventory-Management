@@ -43,8 +43,8 @@
                             </TableView>
                             <ButtonBar layoutX="102.0" layoutY="425.0" prefHeight="40.0" prefWidth="200.0" AnchorPane.rightAnchor="-42.0" AnchorPane.topAnchor="425.0">
                                 <buttons>
-                                    <Button fx:id="addProdBtn" mnemonicParsing="false" text="Add" />
-                                    <Button fx:id="modProdBtn" mnemonicParsing="false" text="Modify" />
+                                    <Button fx:id="addProdBtn" mnemonicParsing="false" onAction="#handleAddProduct" text="Add" />
+                                    <Button fx:id="modProdBtn" mnemonicParsing="false" onAction="#handleModifyProduct" text="Modify" />
                                     <Button fx:id="delProdBtn" mnemonicParsing="false" onAction="#handleDeleteProduct" text="Delete" />
                                 </buttons>
                                 <padding>
