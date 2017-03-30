@@ -97,7 +97,22 @@ public class InventoryManagement {
         productPriceColumn.setCellValueFactory(
                 cellData -> cellData.getValue().productPriceProperty().asObject());
 
-/*
+
+    }
+
+    /**
+     * Is called by the main application to give a reference back to itself.
+     *
+     * @param mainApp
+     */
+    public void setMainApp(MainApp mainApp) {
+        this.mainApp = mainApp;
+
+        // Add observable list data to the table
+        partTable.setItems(mainApp.getPartData());
+        productTable.setItems(mainApp.getProductData());
+
+
         //Search for parts by name or ID.
         FilteredList<Part> filteredPart = new FilteredList<>(mainApp.getPartData(), p -> true);
 
@@ -123,21 +138,28 @@ public class InventoryManagement {
         sortedParts.comparatorProperty().bind(partTable.comparatorProperty());
         partTable.setItems(sortedParts);
 
-        //FilteredList<Product> filteredProduct = new FilteredList<>(mainApp.getProductData(), p -> true);
-        */
-    }
+        //Search for products by name or ID.
+        FilteredList<Product> filteredProduct = new FilteredList<>(mainApp.getProductData(), p -> true);
+        searchProductTextField.textProperty().addListener((observable, oldValue, newValue)->{
+            filteredProduct.setPredicate(prod ->{
+                if (newValue == null || newValue.isEmpty()){
+                    return true;
+                }
+                String lowerCaseFilter = newValue.toLowerCase();
 
-    /**
-     * Is called by the main application to give a reference back to itself.
-     *
-     * @param mainApp
-     */
-    public void setMainApp(MainApp mainApp) {
-        this.mainApp = mainApp;
+                if(Integer.toString(prod.getProductID()).equals(newValue)){
+                    return true;
+                }
+                else if(prod.getProductName().equals(lowerCaseFilter)){
+                    return true;
+                }
+                return false;
+            });
+        });
 
-        // Add observable list data to the table
-        partTable.setItems(mainApp.getPartData());
-        productTable.setItems(mainApp.getProductData());
+        SortedList<Product> sortedProducts = new SortedList<>(filteredProduct);
+        sortedProducts.comparatorProperty().bind(productTable.comparatorProperty());
+        productTable.setItems(sortedProducts);
     }
 
     /**
