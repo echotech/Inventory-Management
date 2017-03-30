@@ -61,7 +61,7 @@ public class ModifyProductController {
     private MainApp mainApp;
 
     public void initialize() {
-        // Initialize the part table with the 4 columns.
+        // Initialize the all parts table with the 4 columns.
         partIdColumn.setCellValueFactory(
                 cellData -> cellData.getValue().partIDProperty().asObject());
         partNameColumn.setCellValueFactory(
@@ -71,7 +71,17 @@ public class ModifyProductController {
         partPriceColumn.setCellValueFactory(
                 cellData -> cellData.getValue().partPriceProperty().asObject());
 
-        prodPartTable.setItems(product.getParts());
+
+
+        // Initialize the associated parts table with the 4 columns.
+        prodPartIdColumn.setCellValueFactory(
+                cellData -> cellData.getValue().partIDProperty().asObject());
+        prodPartNameColumn.setCellValueFactory(
+                cellData -> cellData.getValue().partNameProperty());
+        prodPartInvColumn.setCellValueFactory(
+                cellData -> cellData.getValue().partInStockProperty().asObject());
+        prodPartPriceColumn.setCellValueFactory(
+                cellData -> cellData.getValue().partPriceProperty().asObject());
     }
 
 
@@ -87,6 +97,7 @@ public class ModifyProductController {
 
         // Add observable list data to the table
         partTable.setItems(mainApp.getPartData());
+        prodPartTable.setItems(product.getParts());
 
         //Search for parts by name or ID.
         FilteredList<Part> filteredPart = new FilteredList<>(mainApp.getPartData(), p -> true);
