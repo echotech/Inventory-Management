@@ -45,6 +45,16 @@ public class ModifyProductController {
     private TableColumn<Part, Integer> partInvColumn;
     @FXML
     private TableColumn<Part, Double> partPriceColumn;
+    @FXML
+    private TableView<Part> prodPartTable;
+    @FXML
+    private TableColumn<Part, Integer> prodPartIdColumn;
+    @FXML
+    private TableColumn<Part, String> prodPartNameColumn;
+    @FXML
+    private TableColumn<Part, Integer> prodPartInvColumn;
+    @FXML
+    private TableColumn<Part, Double> prodPartPriceColumn;
 
 
     // Reference to the main application.
@@ -60,18 +70,26 @@ public class ModifyProductController {
                 cellData -> cellData.getValue().partInStockProperty().asObject());
         partPriceColumn.setCellValueFactory(
                 cellData -> cellData.getValue().partPriceProperty().asObject());
+
+        prodPartTable.setItems(product.getParts());
     }
 
 
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
+    }
+
+    public void setDialogStage(Stage dialogStage) {
+        this.dialogStage = dialogStage;
+    }
+
+    public void showParts(){
 
         // Add observable list data to the table
         partTable.setItems(mainApp.getPartData());
 
         //Search for parts by name or ID.
         FilteredList<Part> filteredPart = new FilteredList<>(mainApp.getPartData(), p -> true);
-
 
         searchPartText.textProperty().addListener((observable, oldValue, newValue)->{
             filteredPart.setPredicate(part ->{
@@ -95,10 +113,6 @@ public class ModifyProductController {
         partTable.setItems(sortedParts);
     }
 
-    public void setDialogStage(Stage dialogStage) {
-        this.dialogStage = dialogStage;
-    }
-
     public void setProduct(Product prod) {
         // Fill the labels with info from the part object.
         this.product = prod;
@@ -112,6 +126,32 @@ public class ModifyProductController {
 
     public boolean isSaveClicked() {
         return saveClicked;
+    }
+
+    @FXML
+    private void handleAddPart() {
+        Part selectedPart = partTable.getSelectionModel().getSelectedItem();
+        if (selectedPart != null) {
+            product.addPart(selectedPart);
+
+        } else {
+            // Nothing selected.
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.initOwner(mainApp.getPrimaryStage());
+            alert.setTitle("No Selection");
+            alert.setHeaderText("No Part Selected");
+            alert.setContentText("Please select a part in the table.");
+
+            alert.showAndWait();
+        }
+    }
+
+    @FXML
+    private void handleDeletePart(){
+        int selectedIndex = partTable.getSelectionModel().getSelectedIndex();
+        if (selectedIndex >= 0){
+            prodPartTable.getItems().remove(selectedIndex);
+        }
     }
 
     @FXML

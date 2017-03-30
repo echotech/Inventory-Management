@@ -92,6 +92,7 @@ public class Product {
         return productID;
     }
     public void addPart(Part part){this.parts.add(part);}
+    public ObservableList<Part> getParts(){return this.parts;}
 
     /**
      * Remove part by ID
