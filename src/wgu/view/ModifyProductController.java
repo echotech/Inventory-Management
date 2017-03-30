@@ -1,10 +1,15 @@
 package wgu.view;
 
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import wgu.MainApp;
+import wgu.model.Part;
 import wgu.model.Product;
 
 /**
@@ -28,12 +33,66 @@ public class ModifyProductController {
     private TextField minText;
     @FXML
     private TextField maxText;
+    @FXML
+    private TextField searchPartText;
+    @FXML
+    private TableView<Part> partTable;
+    @FXML
+    private TableColumn<Part, Integer> partIdColumn;
+    @FXML
+    private TableColumn<Part, String> partNameColumn;
+    @FXML
+    private TableColumn<Part, Integer> partInvColumn;
+    @FXML
+    private TableColumn<Part, Double> partPriceColumn;
+
 
     // Reference to the main application.
     private MainApp mainApp;
 
+    public void initialize() {
+        // Initialize the part table with the 4 columns.
+        partIdColumn.setCellValueFactory(
+                cellData -> cellData.getValue().partIDProperty().asObject());
+        partNameColumn.setCellValueFactory(
+                cellData -> cellData.getValue().partNameProperty());
+        partInvColumn.setCellValueFactory(
+                cellData -> cellData.getValue().partInStockProperty().asObject());
+        partPriceColumn.setCellValueFactory(
+                cellData -> cellData.getValue().partPriceProperty().asObject());
+    }
+
+
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
+
+        // Add observable list data to the table
+        partTable.setItems(mainApp.getPartData());
+
+        //Search for parts by name or ID.
+        FilteredList<Part> filteredPart = new FilteredList<>(mainApp.getPartData(), p -> true);
+
+
+        searchPartText.textProperty().addListener((observable, oldValue, newValue)->{
+            filteredPart.setPredicate(part ->{
+                if (newValue == null || newValue.isEmpty()){
+                    return true;
+                }
+                String lowerCaseFilter = newValue.toLowerCase();
+
+                if(Integer.toString(part.getPartID()).equals(newValue)){
+                    return true;
+                }
+                else if(part.getPartName().equals(lowerCaseFilter)){
+                    return true;
+                }
+                return false;
+            });
+        });
+
+        SortedList<Part> sortedParts = new SortedList<>(filteredPart);
+        sortedParts.comparatorProperty().bind(partTable.comparatorProperty());
+        partTable.setItems(sortedParts);
     }
 
     public void setDialogStage(Stage dialogStage) {

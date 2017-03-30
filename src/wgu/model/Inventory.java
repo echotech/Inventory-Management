@@ -7,6 +7,11 @@ import java.util.ArrayList;
  */
 public class Inventory {
 
+    /**
+     * ALL IMPLEMENTED IN InventoryManagement.java
+     */
+    /*
+
     private ArrayList<Product> allProducts;
     private ArrayList<Part> allParts;
 
@@ -32,4 +37,5 @@ public class Inventory {
     public void updateProduct(int up) {
 
     }
+*/
 }

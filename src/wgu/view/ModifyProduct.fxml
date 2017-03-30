@@ -58,8 +58,7 @@
         <AnchorPane layoutX="292.0" layoutY="76.0" minHeight="0.0" minWidth="0.0" prefHeight="76.0" prefWidth="16.0" />
         <Pane layoutX="433.0" layoutY="64.0" prefHeight="37.0" prefWidth="200.0">
             <children>
-                <TextField layoutY="6.0" prefHeight="25.0" prefWidth="124.0" />
-                <Button layoutX="134.0" layoutY="6.0" mnemonicParsing="false" text="Search" />
+                <TextField fx:id="searchPartText" layoutX="60.0" layoutY="6.0" prefHeight="25.0" prefWidth="124.0" promptText="Search Parts" />
             </children>
         </Pane>
         <Button layoutX="580.0" layoutY="200.0" mnemonicParsing="false" text="Add" />
@@ -83,10 +82,10 @@
         </TableView>
         <TableView layoutX="272.0" layoutY="108.0" prefHeight="88.0" prefWidth="346.0">
             <columns>
-                <TableColumn prefWidth="61.0" text="Part ID" />
-                <TableColumn prefWidth="101.0" text="Part Name" />
-                <TableColumn prefWidth="99.0" text="Inventory Level" />
-                <TableColumn prefWidth="85.5" text="Price Per Unit" />
+                <TableColumn fx:id="partIdColumn" prefWidth="61.0" text="Part ID" />
+                <TableColumn fx:id="partNameColumn" prefWidth="101.0" text="Part Name" />
+                <TableColumn fx:id="partInvColumn" prefWidth="99.0" text="Inventory Level" />
+                <TableColumn fx:id="partPriceColumn" prefWidth="85.5" text="Price Per Unit" />
             </columns>
         </TableView>
     </children>

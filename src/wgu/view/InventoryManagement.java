@@ -112,10 +112,8 @@ public class InventoryManagement {
         partTable.setItems(mainApp.getPartData());
         productTable.setItems(mainApp.getProductData());
 
-
         //Search for parts by name or ID.
         FilteredList<Part> filteredPart = new FilteredList<>(mainApp.getPartData(), p -> true);
-
 
         searchPartTextField.textProperty().addListener((observable, oldValue, newValue)->{
             filteredPart.setPredicate(part ->{
@@ -215,8 +213,8 @@ public class InventoryManagement {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.initOwner(mainApp.getPrimaryStage());
             alert.setTitle("No Selection");
-            alert.setHeaderText("No Person Selected");
-            alert.setContentText("Please select a person in the table.");
+            alert.setHeaderText("No Part Selected");
+            alert.setContentText("Please select a part in the table.");
 
             alert.showAndWait();
         }
@@ -232,13 +230,16 @@ public class InventoryManagement {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.initOwner(mainApp.getPrimaryStage());
             alert.setTitle("No Selection");
-            alert.setHeaderText("No Person Selected");
-            alert.setContentText("Please select a person in the table.");
+            alert.setHeaderText("No Product Selected");
+            alert.setContentText("Please select a product in the table.");
 
             alert.showAndWait();
         }
     }
 
+    /**
+     * Launches add new product window.
+     */
     @FXML
     public void handleAddProduct(){
        Product tempProduct = new Product("Temp",1,1);
@@ -281,12 +282,4 @@ public class InventoryManagement {
         mainApp.primaryStage.close();
     }
 
-
-    //TODO lookup product
-
-    //TODO lookup part
-
-    public void updateProduct(int prod) {
-        //IMPLEMENTED IN handleModifyProduct
-    }
 }
