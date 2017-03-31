@@ -200,6 +200,7 @@ public class MainApp extends Application {
             controller.setDialogStage(dialogStage);
             controller.showParts();
 
+
             // Show the dialog and wait until the user closes it
             dialogStage.showAndWait();
 
@@ -229,6 +230,7 @@ public class MainApp extends Application {
             controller.setMainApp(this);
             controller.setDialogStage(dialogStage);
             controller.setProduct(prod);
+            controller.showParts();
 
             // Show the dialog and wait until the user closes it
             dialogStage.showAndWait();
