@@ -3,14 +3,13 @@ package wgu.view;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import wgu.MainApp;
 import wgu.model.Part;
 import wgu.model.Product;
+
+import java.util.Optional;
 
 /**
  * Created by admin on 3/28/2017.
@@ -161,7 +160,15 @@ public class ModifyProductController {
     private void handleDeletePart(){
         int selectedIndex = partTable.getSelectionModel().getSelectedIndex();
         if (selectedIndex >= 0){
-            prodPartTable.getItems().remove(selectedIndex);
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Delete?");
+            alert.setHeaderText("Are you sure you want to delete this part?");
+            alert.setContentText("You'll have to click add again.");
+
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK){
+                // ... user chose OK
+            prodPartTable.getItems().remove(selectedIndex);}
         }
     }
 
@@ -273,6 +280,16 @@ public class ModifyProductController {
 
         @FXML
     private void handleCancel() {
-        dialogStage.close();
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Cancel?");
+            alert.setHeaderText("Are you sure you want to cancel?");
+            alert.setContentText("Data will not be saved.");
+
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK){
+                // ... user chose OK
+                dialogStage.close();
+            }
+
     }
 }

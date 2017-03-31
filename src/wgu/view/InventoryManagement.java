@@ -9,6 +9,8 @@ import wgu.model.InHouse;
 import wgu.model.Part;
 import wgu.model.Product;
 
+import java.util.Optional;
+
 
 /**
  * Created by jreis on 2/27/2017.
@@ -207,7 +209,15 @@ public class InventoryManagement {
     private void handleDeletePart() {
         int selectedIndex = partTable.getSelectionModel().getSelectedIndex();
         if (selectedIndex >= 0) {
-            partTable.getItems().remove(selectedIndex);
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Delete?");
+            alert.setHeaderText("Are you sure you want to delete this part?");
+            alert.setContentText("You cannot undo this action.");
+
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK){
+                // ... user chose OK
+            partTable.getItems().remove(selectedIndex);}
         } else {
             // Nothing selected.
             Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -223,19 +233,43 @@ public class InventoryManagement {
     @FXML
     private void handleDeleteProduct() {
         int selectedIndex = productTable.getSelectionModel().getSelectedIndex();
+        Product selectedProduct = productTable.getSelectionModel().getSelectedItem();
         if (selectedIndex >= 0) {
-            productTable.getItems().remove(selectedIndex);
+            if (selectedProduct.getParts().isEmpty()) {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Delete?");
+                alert.setHeaderText("Are you sure you want to delete this product?");
+                alert.setContentText("You can not undo this action.");
+
+                Optional<ButtonType> result = alert.showAndWait();
+                if (result.get() == ButtonType.OK) {
+                    // ... user chose OK
+                    System.out.println("Dis");
+                    productTable.getItems().remove(selectedIndex);
+                } }
+            if (!(selectedProduct.getParts().isEmpty())){
+                    Alert alert2 = new Alert(Alert.AlertType.WARNING);
+                    alert2.initOwner(mainApp.getPrimaryStage());
+                    alert2.setTitle("Parts Associated");
+                    alert2.setHeaderText("This product has parts associated with it.");
+                    alert2.setContentText("Click modify product and remove associated parts before deleting.");
+
+                }
+
         } else {
             // Nothing selected.
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.initOwner(mainApp.getPrimaryStage());
-            alert.setTitle("No Selection");
-            alert.setHeaderText("No Product Selected");
-            alert.setContentText("Please select a product in the table.");
+            Alert alert3 = new Alert(Alert.AlertType.WARNING);
+            alert3.initOwner(mainApp.getPrimaryStage());
+            alert3.setTitle("No Selection");
+            alert3.setHeaderText("No Product Selected");
+            alert3.setContentText("Please select a product in the table.");
 
-            alert.showAndWait();
+            alert3.showAndWait();
+            selectedProduct.getParts().isEmpty();
         }
     }
+
+
 
     /**
      * Launches add new product window.
@@ -279,7 +313,17 @@ public class InventoryManagement {
 
     @FXML
     private void handleExit() {
-        mainApp.primaryStage.close();
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Quit?");
+        alert.setHeaderText("Are you sure you want to quit?");
+        alert.setContentText("Data will not be saved.");
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK){
+            // ... user chose OK
+            mainApp.primaryStage.close();
+        }
+
     }
 
 }

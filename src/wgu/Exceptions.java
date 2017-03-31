@@ -13,7 +13,7 @@ public class Exceptions {
 
     //TODO set 2
     //TODO preventing user from deleting product that has parts
-    //TODO include a confirm dialoge for Delete and Cancel buttons
+
     //TODO ensure that price of product can't be less than cost of parts
-    //TODO ensure that product must have a name, price, category and inventory level
+
 }
