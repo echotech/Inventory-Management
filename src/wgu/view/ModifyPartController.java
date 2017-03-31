@@ -120,155 +120,210 @@ public class ModifyPartController {
 
     @FXML
     private void handleModifySave() {
+        if (isInputValid()) {
 
-        if (part instanceof InHouse) {
-            try{
-                Integer partInstock = Integer.parseInt(invLabel.getText());
-                String partName = nameLabel.getText();
-                Double partPrice = Double.parseDouble(priceLabel.getText());
-                Integer partMin = Integer.parseInt(minLabel.getText());
-                Integer partMax = Integer.parseInt(maxLabel.getText());
-                Integer macId = Integer.parseInt(machineIdLabel.getText());
+            if (part instanceof InHouse) {
+                try {
+                    Integer partInstock = Integer.parseInt(invLabel.getText());
+                    String partName = nameLabel.getText();
+                    Double partPrice = Double.parseDouble(priceLabel.getText());
+                    Integer partMin = Integer.parseInt(minLabel.getText());
+                    Integer partMax = Integer.parseInt(maxLabel.getText());
+                    Integer macId = Integer.parseInt(machineIdLabel.getText());
 
 
-                part.setPartName(partName);
-                part.setPartPrice(partPrice);
-                part.setPartInstock(partInstock);
-                part.setPartMin(partMin);
-                part.setPartMax(partMax);
-                ((InHouse) part).setMachineID(macId);
+                    part.setPartName(partName);
+                    part.setPartPrice(partPrice);
+                    part.setPartInstock(partInstock);
+                    part.setPartMin(partMin);
+                    part.setPartMax(partMax);
+                    ((InHouse) part).setMachineID(macId);
 
-                saveClicked = true;
-                dialogStage.close();
+                    saveClicked = true;
+                    dialogStage.close();
 
-            } catch(NumberFormatException nfe){
+                } catch (NumberFormatException nfe) {
+                    Alert alert = new Alert(AlertType.ERROR);
+                    alert.initOwner(dialogStage);
+                    alert.setTitle("Invalid Fields");
+                    alert.setHeaderText("Please correct invalid fields");
+                    alert.setContentText("Ensure all fields have accurate data");
+
+                    alert.showAndWait();
+                }
+
+
+            } else if (part instanceof Outsourced) {
+                try {
+                    Integer partInstock = Integer.parseInt(invLabel.getText());
+                    String partName = nameLabel.getText();
+                    Double partPrice = Double.parseDouble(priceLabel.getText());
+                    Integer partMin = Integer.parseInt(minLabel.getText());
+                    Integer partMax = Integer.parseInt(maxLabel.getText());
+                    String compName = companyNameLabel.getText();
+
+                    ((Outsourced) part).setCompanyName(compName);
+                    part.setPartMin(partMin);
+                    part.setPartMax(partMax);
+                    part.setPartName(partName);
+                    part.setPartPrice(partPrice);
+                    part.setPartInstock(partInstock);
+
+
+                    saveClicked = true;
+                    dialogStage.close();
+
+                } catch (NumberFormatException nfe) {
+                    Alert alert = new Alert(AlertType.ERROR);
+                    alert.initOwner(dialogStage);
+                    alert.setTitle("Invalid Fields");
+                    alert.setHeaderText("Please correct invalid fields");
+                    alert.setContentText("Ensure all fields have accurate data");
+
+                    alert.showAndWait();
+                }
+
+
+            } else {
+                // Show the error message.
                 Alert alert = new Alert(AlertType.ERROR);
                 alert.initOwner(dialogStage);
                 alert.setTitle("Invalid Fields");
                 alert.setHeaderText("Please correct invalid fields");
-                alert.setContentText("Ensure all fields have accurate data");
+                alert.setContentText("Please select In-House or Outsourced");
 
                 alert.showAndWait();
+
             }
-
-
-
-        } else if (part instanceof Outsourced) {
-            try {
-                Integer partInstock = Integer.parseInt(invLabel.getText());
-                String partName = nameLabel.getText();
-                Double partPrice = Double.parseDouble(priceLabel.getText());
-                Integer partMin = Integer.parseInt(minLabel.getText());
-                Integer partMax = Integer.parseInt(maxLabel.getText());
-                String compName = companyNameLabel.getText();
-
-                ((Outsourced)part).setCompanyName(compName);
-                part.setPartMin(partMin);
-                part.setPartMax(partMax);
-                part.setPartName(partName);
-                part.setPartPrice(partPrice);
-                part.setPartInstock(partInstock);
-
-
-                saveClicked = true;
-                dialogStage.close();
-
-            } catch(NumberFormatException nfe){
-                Alert alert = new Alert(AlertType.ERROR);
-                alert.initOwner(dialogStage);
-                alert.setTitle("Invalid Fields");
-                alert.setHeaderText("Please correct invalid fields");
-                alert.setContentText("Ensure all fields have accurate data");
-
-                alert.showAndWait();
-            }
-
-
-
-        } else {
-            // Show the error message.
-            Alert alert = new Alert(AlertType.ERROR);
-            alert.initOwner(dialogStage);
-            alert.setTitle("Invalid Fields");
-            alert.setHeaderText("Please correct invalid fields");
-            alert.setContentText("Please select In-House or Outsourced");
-
-            alert.showAndWait();
 
         }
-
     }
 
     @FXML
     private void handleNewSave() {
-        if (partType.getSelectedToggle().equals(tbInhouse)) {
-           try{
-            Integer partInstock = Integer.parseInt(invLabel.getText());
-            String partName = nameLabel.getText();
-            Double partPrice = Double.parseDouble(priceLabel.getText());
-            Integer partMin = Integer.parseInt(minLabel.getText());
-            Integer partMax = Integer.parseInt(maxLabel.getText());
-            Integer macId = Integer.parseInt(machineIdLabel.getText());
+        if (isInputValid()) {
+            if (partType.getSelectedToggle().equals(tbInhouse)) {
+                try {
+                    Integer partInstock = Integer.parseInt(invLabel.getText());
+                    String partName = nameLabel.getText();
+                    Double partPrice = Double.parseDouble(priceLabel.getText());
+                    Integer partMin = Integer.parseInt(minLabel.getText());
+                    Integer partMax = Integer.parseInt(maxLabel.getText());
+                    Integer macId = Integer.parseInt(machineIdLabel.getText());
 
-            Part part = new InHouse(partName,partPrice,partInstock);
-            part.setPartName(partName);
-            part.setPartPrice(partPrice);
-            part.setPartInstock(partInstock);
-            part.setPartMin(partMin);
-            part.setPartMax(partMax);
-            ((InHouse) part).setMachineID(macId);
+                    Part part = new InHouse(partName, partPrice, partInstock);
+                    part.setPartName(partName);
+                    part.setPartPrice(partPrice);
+                    part.setPartInstock(partInstock);
+                    part.setPartMin(partMin);
+                    part.setPartMax(partMax);
+                    ((InHouse) part).setMachineID(macId);
 
-            mainApp.addPartData(part);
+                    mainApp.addPartData(part);
 
-            saveClicked = true;
-            dialogStage.close();
+                    saveClicked = true;
+                    dialogStage.close();
 
-            } catch(NumberFormatException nfe){
+                } catch (NumberFormatException nfe) {
+                    Alert alert = new Alert(AlertType.ERROR);
+                    alert.initOwner(dialogStage);
+                    alert.setTitle("Invalid Fields");
+                    alert.setHeaderText("Please correct invalid fields");
+                    alert.setContentText("Ensure all fields have accurate data");
+
+                    alert.showAndWait();
+                }
+            } else if (partType.getSelectedToggle().equals(tbOutsourced)) {
+                try {
+                    Integer partInstock = Integer.parseInt(invLabel.getText());
+                    String partName = nameLabel.getText();
+                    Double partPrice = Double.parseDouble(priceLabel.getText());
+                    Integer partMin = Integer.parseInt(minLabel.getText());
+                    Integer partMax = Integer.parseInt(maxLabel.getText());
+                    String compName = companyNameLabel.getText();
+
+                    Part outPart = new Outsourced(partName, partPrice, partInstock);
+                    outPart.setPartMin(partMin);
+                    outPart.setPartMax(partMax);
+                    ((Outsourced) outPart).setCompanyName(compName);
+
+                    mainApp.addPartData(outPart);
+                    saveClicked = true;
+                    dialogStage.close();
+
+                } catch (NumberFormatException nfe) {
+                    Alert alert = new Alert(AlertType.ERROR);
+                    alert.initOwner(dialogStage);
+                    alert.setTitle("Invalid Fields");
+                    alert.setHeaderText("Please correct invalid fields");
+                    alert.setContentText("Ensure all fields have accurate data");
+
+                    alert.showAndWait();
+                }
+            } else {
+                // Show the error message.
                 Alert alert = new Alert(AlertType.ERROR);
                 alert.initOwner(dialogStage);
                 alert.setTitle("Invalid Fields");
                 alert.setHeaderText("Please correct invalid fields");
-                alert.setContentText("Ensure all fields have accurate data");
+                alert.setContentText("Please select In-House or Outsourced");
 
                 alert.showAndWait();
+
             }
-        } else if (partType.getSelectedToggle().equals(tbOutsourced)) {
-            try {
-                Integer partInstock = Integer.parseInt(invLabel.getText());
-                String partName = nameLabel.getText();
-                Double partPrice = Double.parseDouble(priceLabel.getText());
-                Integer partMin = Integer.parseInt(minLabel.getText());
-                Integer partMax = Integer.parseInt(maxLabel.getText());
-                String compName = companyNameLabel.getText();
+        }
+    }
 
-                Part outPart = new Outsourced(partName, partPrice, partInstock);
-                outPart.setPartMin(partMin);
-                outPart.setPartMax(partMax);
-                ((Outsourced) outPart).setCompanyName(compName);
+    /**
+     * Validates text
+     * @return
+     */
+    private boolean isInputValid() {
+        String errorMessage = "";
 
-                mainApp.addPartData(outPart);
-                saveClicked = true;
-                dialogStage.close();
+        if (nameLabel.getText() == null || nameLabel.getText().length() == 0) {
+            errorMessage += "No valid product name!\n";
+        }
+        if (invLabel.getText() == null || invLabel.getText().length() == 0) {
+            errorMessage += "No valid inventory amount!\n";
+        }
+        if (minLabel.getText() == null || minLabel.getText().length() == 0) {
+            errorMessage += "No valid min!\n";
+        }
 
-            } catch(NumberFormatException nfe){
-                Alert alert = new Alert(AlertType.ERROR);
-                alert.initOwner(dialogStage);
-                alert.setTitle("Invalid Fields");
-                alert.setHeaderText("Please correct invalid fields");
-                alert.setContentText("Ensure all fields have accurate data");
+        if (maxLabel.getText() == null || maxLabel.getText().length() == 0) {
+            errorMessage += "No valid max!\n";
+        }
 
-                alert.showAndWait();
-            }
+        if (new Integer(maxLabel.getText())< new Integer(minLabel.getText())){
+            errorMessage += "Max must be greater than min!\n";
+        }
+
+        if (new Integer(maxLabel.getText())>new Integer(minLabel.getText())){
+            errorMessage += "Min must be less than max!\n";
+        }
+
+        if (new Integer(invLabel.getText())< new Integer(minLabel.getText())){
+            errorMessage += "Inventory below minimum!\n";
+        }
+
+        if (priceLabel.getText() == null || priceLabel.getText().length() == 0) {
+            errorMessage += "No valid price!\n";
+        }
+
+        if (errorMessage.length() == 0) {
+            return true;
         } else {
             // Show the error message.
-            Alert alert = new Alert(AlertType.ERROR);
+            Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.initOwner(dialogStage);
             alert.setTitle("Invalid Fields");
             alert.setHeaderText("Please correct invalid fields");
-            alert.setContentText("Please select In-House or Outsourced");
+            alert.setContentText(errorMessage);
 
             alert.showAndWait();
 
+            return false;
         }
     }
 

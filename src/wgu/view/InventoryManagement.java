@@ -5,7 +5,6 @@ import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import wgu.MainApp;
-import wgu.model.InHouse;
 import wgu.model.Part;
 import wgu.model.Product;
 
@@ -208,6 +207,7 @@ public class InventoryManagement {
     @FXML
     private void handleDeletePart() {
         int selectedIndex = partTable.getSelectionModel().getSelectedIndex();
+        Part selectedPart = partTable.getSelectionModel().getSelectedItem();
         if (selectedIndex >= 0) {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Delete?");
@@ -217,7 +217,7 @@ public class InventoryManagement {
             Optional<ButtonType> result = alert.showAndWait();
             if (result.get() == ButtonType.OK){
                 // ... user chose OK
-            partTable.getItems().remove(selectedIndex);}
+            mainApp.getPartData().remove(selectedPart);}
         } else {
             // Nothing selected.
             Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -234,30 +234,37 @@ public class InventoryManagement {
     private void handleDeleteProduct() {
         int selectedIndex = productTable.getSelectionModel().getSelectedIndex();
         Product selectedProduct = productTable.getSelectionModel().getSelectedItem();
+        boolean hasNoParts = selectedProduct.getParts().isEmpty();
+        //If there is a product selected.
         if (selectedIndex >= 0) {
-            if (selectedProduct.getParts().isEmpty()) {
+            //If the product has no parts.
+            if (hasNoParts) {
                 Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.setTitle("Delete?");
                 alert.setHeaderText("Are you sure you want to delete this product?");
                 alert.setContentText("You can not undo this action.");
 
                 Optional<ButtonType> result = alert.showAndWait();
+                //If they click OK
                 if (result.get() == ButtonType.OK) {
                     // ... user chose OK
                     System.out.println("Dis");
-                    productTable.getItems().remove(selectedIndex);
-                } }
-            if (!(selectedProduct.getParts().isEmpty())){
-                    Alert alert2 = new Alert(Alert.AlertType.WARNING);
-                    alert2.initOwner(mainApp.getPrimaryStage());
-                    alert2.setTitle("Parts Associated");
-                    alert2.setHeaderText("This product has parts associated with it.");
-                    alert2.setContentText("Click modify product and remove associated parts before deleting.");
-
+                    mainApp.getProductData().remove(selectedProduct);
                 }
+            }
+            //If the product has parts
+            else {
+                Alert alert2 = new Alert(Alert.AlertType.WARNING);
+                alert2.initOwner(mainApp.getPrimaryStage());
+                alert2.setTitle("Parts Associated");
+                alert2.setHeaderText("This product has parts associated with it.");
+                alert2.setContentText("Click modify product and remove associated parts before deleting.");
 
-        } else {
+                alert2.showAndWait();
+            }
             // Nothing selected.
+        } else {
+
             Alert alert3 = new Alert(Alert.AlertType.WARNING);
             alert3.initOwner(mainApp.getPrimaryStage());
             alert3.setTitle("No Selection");
@@ -265,9 +272,10 @@ public class InventoryManagement {
             alert3.setContentText("Please select a product in the table.");
 
             alert3.showAndWait();
-            selectedProduct.getParts().isEmpty();
+
         }
     }
+
 
 
 

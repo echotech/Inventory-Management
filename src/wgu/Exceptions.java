@@ -11,9 +11,7 @@ public class Exceptions {
     //TODO ensure products have at least one part
 
 
-    //TODO set 2
-    //TODO preventing user from deleting product that has parts
 
-    //TODO ensure that price of product can't be less than cost of parts
+
 
 }

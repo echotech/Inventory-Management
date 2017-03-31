@@ -235,6 +235,26 @@ public class ModifyProductController {
         }
     }
 
+    public boolean priceTooLow(){
+        String priceToString = priceText.getText().toString();
+        Double prodPrice = Double.parseDouble(priceToString);
+        Double partTotal= 0.0;
+
+        //Add all the associated parts prices
+        for(Part part : product.getParts()){
+               partTotal += part.getPartPrice();
+
+        }
+
+        if(partTotal>prodPrice){
+            return true;
+        }
+        else {
+            return false;
+        }
+
+    }
+
     /**
      * Validates the user input in the text fields.
      *
@@ -257,8 +277,28 @@ public class ModifyProductController {
             errorMessage += "No valid max!\n";
         }
 
+        if (new Integer(maxText.getText())< new Integer(minText.getText())){
+            errorMessage += "Max must be greater than min!\n";
+        }
+
+        if (new Integer(invText.getText())< new Integer(minText.getText())){
+            errorMessage += "Inventory below minimum!\n";
+        }
+
         if (priceText.getText() == null || priceText.getText().length() == 0) {
             errorMessage += "No valid price!\n";
+        }
+
+        if (new Integer(maxText.getText())>new Integer(minText.getText())){
+            errorMessage += "Min must be less than max!\n";
+        }
+        //Make sure product price isn't lower than the sum of its parts.
+        if (priceTooLow()){
+            errorMessage += "Product price can't be lower than the sum of it's parts!\n";
+        }
+
+        if (product.getParts().isEmpty()){
+            errorMessage += "A product needs parts\n";
         }
 
         if (errorMessage.length() == 0) {
