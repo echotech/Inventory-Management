@@ -45,10 +45,7 @@ public class ModifyPartController {
     ToggleButton tbOutsourced = new ToggleButton();
     @FXML
     final ToggleGroup partType = new ToggleGroup();
-    @FXML
-    private Button save;
-    @FXML
-    private Button cancel;
+
 
     private Stage dialogStage;
     private Part part;
@@ -62,10 +59,15 @@ public class ModifyPartController {
         tbInhouse.setToggleGroup(partType);
         tbOutsourced.setToggleGroup(partType);
 
+        companyNameText.setVisible(false);
+        companyNameLabel.setVisible(false);
+        tbInhouse.setSelected(true);
+
         partType.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
             public void changed(ObservableValue<? extends Toggle> ov,
                                 Toggle oldToggle, Toggle newToggle) {
-                if (newToggle.equals(tbInhouse)) {
+
+             if (newToggle.equals(tbInhouse)) {
                     companyNameText.setVisible(false);
                     companyNameLabel.setVisible(false);
                     machineIdText.setVisible(true);
@@ -83,6 +85,7 @@ public class ModifyPartController {
 
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
+
     }
 
     public void setDialogStage(Stage dialogStage) {
@@ -98,7 +101,7 @@ public class ModifyPartController {
         priceLabel.setText(Double.toString(part.getPartPrice()));
         minLabel.setText(Integer.toString(part.getPartMin()));
         maxLabel.setText(Integer.toString(part.getPartMax()));
-        //TODO SET THE TOGGLE!
+
         if (part instanceof InHouse) {
             machineIdLabel.setText(Integer.toString(((InHouse) part).getMachineID()));
             tbInhouse.setSelected(true);
