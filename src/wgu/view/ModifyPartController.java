@@ -11,6 +11,8 @@ import wgu.model.InHouse;
 import wgu.model.Outsourced;
 import wgu.model.Part;
 
+import java.util.Optional;
+
 /**
  * Created by jreis on 2/28/2017.
  */
@@ -97,7 +99,7 @@ public class ModifyPartController {
         minLabel.setText(Integer.toString(part.getPartMin()));
         maxLabel.setText(Integer.toString(part.getPartMax()));
         //TODO SET THE TOGGLE!
-        if(part instanceof InHouse) {
+        if (part instanceof InHouse) {
             machineIdLabel.setText(Integer.toString(((InHouse) part).getMachineID()));
             tbInhouse.setSelected(true);
             companyNameLabel.setVisible(false);
@@ -276,6 +278,7 @@ public class ModifyPartController {
 
     /**
      * Validates text
+     *
      * @return
      */
     private boolean isInputValid() {
@@ -295,16 +298,20 @@ public class ModifyPartController {
             errorMessage += "No valid max!\n";
         }
 
-        if (new Integer(maxLabel.getText())< new Integer(minLabel.getText())){
+        if (new Integer(maxLabel.getText()) < new Integer(minLabel.getText())) {
             errorMessage += "Max must be greater than min!\n";
         }
 
-        if (new Integer(maxLabel.getText())>new Integer(minLabel.getText())){
+        if (new Integer(maxLabel.getText()) < new Integer(minLabel.getText())) {
             errorMessage += "Min must be less than max!\n";
         }
 
-        if (new Integer(invLabel.getText())< new Integer(minLabel.getText())){
+        if (new Integer(invLabel.getText()) < new Integer(minLabel.getText())) {
             errorMessage += "Inventory below minimum!\n";
+        }
+
+        if (new Integer(invLabel.getText())> new Integer(maxLabel.getText())) {
+            errorMessage += "Inventory above maximum!\n";
         }
 
         if (priceLabel.getText() == null || priceLabel.getText().length() == 0) {
@@ -332,6 +339,15 @@ public class ModifyPartController {
      */
     @FXML
     private void handleCancel() {
-        dialogStage.close();
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Cancel?");
+        alert.setHeaderText("Are you sure you want to cancel?");
+        alert.setContentText("Data will not be saved.");
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK) {
+            // ... user chose OK
+            dialogStage.close();
+        }
     }
 }

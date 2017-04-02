@@ -281,15 +281,23 @@ public class ModifyProductController {
             errorMessage += "Max must be greater than min!\n";
         }
 
-        if (new Integer(invText.getText())< new Integer(minText.getText())){
+        if (new Integer(maxText.getText()) < new Integer(minText.getText())) {
+            errorMessage += "Min must be less than max!\n";
+        }
+
+        if (new Integer(invText.getText()) < new Integer(minText.getText())) {
             errorMessage += "Inventory below minimum!\n";
+        }
+
+        if (new Integer(invText.getText())> new Integer(maxText.getText())) {
+            errorMessage += "Inventory above maximum!\n";
         }
 
         if (priceText.getText() == null || priceText.getText().length() == 0) {
             errorMessage += "No valid price!\n";
         }
 
-        if (new Integer(maxText.getText())>new Integer(minText.getText())){
+        if (new Integer(maxText.getText())<new Integer(minText.getText())){
             errorMessage += "Min must be less than max!\n";
         }
         //Make sure product price isn't lower than the sum of its parts.

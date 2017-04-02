@@ -43,7 +43,7 @@ public class MainApp extends Application {
 
     public MainApp() {
 
-        partData.add(new InHouse("Stupid Part", 10, 1));
+        partData.add(new InHouse("Part1", 10, 1));
         productData.add(new Product( "Prod1",3.50, 1));
     }
 
