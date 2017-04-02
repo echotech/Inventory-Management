@@ -47,6 +47,7 @@ public class ModifyPartController {
     final ToggleGroup partType = new ToggleGroup();
 
 
+
     private Stage dialogStage;
     private Part part;
     private boolean saveClicked = false;
@@ -284,6 +285,42 @@ public class ModifyPartController {
         }
     }
 
+
+    public boolean isDupePartId() {
+
+        try {
+            int currentId = part.getPartID();
+
+        if (idLabel.getText() == null) {
+            System.out.println("null");
+            return false;
+        } else {
+            if (currentId == new Integer(idLabel.getText())) {
+                System.out.println("Current match");
+
+                return false;
+            } else {
+                for (Part p : mainApp.getPartData()) {
+                    if (p.getPartID() == (new Integer(idLabel.getText()))) {
+                        System.out.println("dupe");
+                        return true;
+                    }
+
+                }
+            }
+
+        }
+        } catch(NumberFormatException nfe){
+            System.out.println("Nfe");
+            return false;
+        }
+        catch(NullPointerException npe){
+            return false;
+        }
+        System.out.println("nothing ventured");
+        return false;
+    }
+
     /**
      * Validates text
      *
@@ -300,6 +337,10 @@ public class ModifyPartController {
         }
         if (minLabel.getText() == null || minLabel.getText().length() == 0) {
             errorMessage += "No valid min!\n";
+        }
+
+        if (isDupePartId()){
+            errorMessage += "A part with that ID already exists!\n";
         }
 
         if (maxLabel.getText() == null || maxLabel.getText().length() == 0) {

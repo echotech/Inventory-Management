@@ -30,7 +30,7 @@
             <children>
                 <AnchorPane layoutX="8.0" layoutY="14.0" prefHeight="32.0" prefWidth="260.0">
                     <children>
-                        <TextField fx:id="idLabel" disable="true" editable="false" layoutX="130.0" layoutY="2.0" prefHeight="25.0" prefWidth="116.0" promptText="Auto-Generated" />
+                        <TextField fx:id="idLabel" layoutX="130.0" layoutY="2.0" prefHeight="25.0" prefWidth="116.0" promptText="Auto-Generated" />
                         <Text layoutX="54.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ID" />
                     </children>
                 </AnchorPane>
