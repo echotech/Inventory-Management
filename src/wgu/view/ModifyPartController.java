@@ -107,15 +107,11 @@ public class ModifyPartController {
             tbInhouse.setSelected(true);
             companyNameLabel.setVisible(false);
             companyNameText.setVisible(false);
-            tbOutsourced.setDisable(true);
-
         } else {
             companyNameLabel.setText(((Outsourced) part).getCompanyName());
             tbOutsourced.setSelected(true);
             machineIdLabel.setVisible(false);
             machineIdText.setVisible(false);
-            tbInhouse.setDisable(true);
-
         }
     }
 
@@ -125,10 +121,12 @@ public class ModifyPartController {
 
     @FXML
     private void handleModifySave() {
-        if (isInputValid()) {
 
-            if (part instanceof InHouse) {
+        if (isInputValid()) {
+            mainApp.getPartData().remove(part);
+            if (partType.getSelectedToggle().equals(tbInhouse)) {
                 try {
+                    Integer partId = Integer.parseInt(idLabel.getText());
                     Integer partInstock = Integer.parseInt(invLabel.getText());
                     String partName = nameLabel.getText();
                     Double partPrice = Double.parseDouble(priceLabel.getText());
@@ -137,13 +135,16 @@ public class ModifyPartController {
                     Integer macId = Integer.parseInt(machineIdLabel.getText());
 
 
+                    Part part = new InHouse(partName,partPrice,partInstock);
                     part.setPartName(partName);
+                    part.setPartID(partId);
                     part.setPartPrice(partPrice);
                     part.setPartInstock(partInstock);
                     part.setPartMin(partMin);
                     part.setPartMax(partMax);
                     ((InHouse) part).setMachineID(macId);
 
+                    mainApp.addPartData(part);
                     saveClicked = true;
                     dialogStage.close();
 
@@ -158,8 +159,9 @@ public class ModifyPartController {
                 }
 
 
-            } else if (part instanceof Outsourced) {
+            } else if (partType.getSelectedToggle().equals(tbOutsourced)) {
                 try {
+                    Integer partId = Integer.parseInt(idLabel.getText());
                     Integer partInstock = Integer.parseInt(invLabel.getText());
                     String partName = nameLabel.getText();
                     Double partPrice = Double.parseDouble(priceLabel.getText());
@@ -167,14 +169,17 @@ public class ModifyPartController {
                     Integer partMax = Integer.parseInt(maxLabel.getText());
                     String compName = companyNameLabel.getText();
 
+                    Part part = new Outsourced(partName, partPrice, partInstock);
+
                     ((Outsourced) part).setCompanyName(compName);
+                    part.setPartID(partId);
                     part.setPartMin(partMin);
                     part.setPartMax(partMax);
                     part.setPartName(partName);
                     part.setPartPrice(partPrice);
                     part.setPartInstock(partInstock);
 
-
+                    mainApp.addPartData(part);
                     saveClicked = true;
                     dialogStage.close();
 
@@ -353,4 +358,5 @@ public class ModifyPartController {
             dialogStage.close();
         }
     }
+
 }

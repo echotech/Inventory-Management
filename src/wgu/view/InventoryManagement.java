@@ -168,6 +168,7 @@ public class InventoryManagement {
     @FXML
     private void handleModifyPart() {
         Part selectedPart = partTable.getSelectionModel().getSelectedItem();
+
         if (selectedPart != null) {
             boolean saveClicked = mainApp.showModifyPartDialog(selectedPart);
             if (saveClicked) {
